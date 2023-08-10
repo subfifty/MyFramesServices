@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+  <SignedInfo>
+    <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+    <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1" />
+    <Reference URI="#License">
+      <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+      <DigestValue>VyfUOBjmlC0NXZAHWLDPD44rDym+lqSsrKLFL0WYQ+w=</DigestValue>
+    </Reference>
+  </SignedInfo>
+  <SignatureValue>L4Jb3qAlEVrUssIB/eMLw0rEkUDLaMDW2UOHgwJ5jmqjRbOPhsl9qQ==</SignatureValue>
+  <Object Id="License">
+    <Version xmlns="">1.0</Version>
+    <LicenseNumber xmlns="">95C308690B8</LicenseNumber>
+    <ComputerIdentifier xmlns="">02ZE9EX3J7V86Z6Q4P8DGGYFQ2GQT</ComputerIdentifier>
+    <EMail xmlns="">dirk.walkowiak@c4b.de</EMail>
+    <InfoTextDE xmlns="" />
+    <InfoTextEN xmlns="" />
+    <WarningTextDE xmlns="" />
+    <WarningTextEN xmlns="" />
+    <SystemID xmlns="">XID-QT2N3526</SystemID>
+    <CustomerData Name="C4B Com For Business AG" StreetAndHouseNo="Gabriele Münter Str. 5" ZIPCode="82110" City="Germering" Country="DE" xmlns="" />
+    <MigratedClientLicenses xmlns="" />
+    <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+      <SignedInfo>
+        <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+        <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1" />
+        <Reference URI="#ProductLicense_1">
+          <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+          <DigestValue>HDPAka8gSjxHXWxqSPXUYUceDQeZ2Gtcm/olz5aBKzI=</DigestValue>
+        </Reference>
+      </SignedInfo>
+      <SignatureValue>Hd6lHOribNrBdYXk/udhe4DU+QSiTStSRPduyPVGvSnHlTGGv+IVaA==</SignatureValue>
+      <Object Id="ProductLicense_1">
+        <Version xmlns="">1.0</Version>
+        <Description xmlns="">XPhone Connect Activation License</Description>
+        <ProductInfo Code="41" Edition="2" Version="999" Bundle="0" Description="XPhone Connect Activation License" xmlns="" />
+        <LicenseForUser xmlns="">False</LicenseForUser>
+        <SupplyChannel xmlns="">99</SupplyChannel>
+        <SerialNumber xmlns="">1</SerialNumber>
+        <ExpirationDate xmlns="">01/01/1900</ExpirationDate>
+        <LicenseCount xmlns="">1</LicenseCount>
+        <LeaseTime xmlns="">144000</LeaseTime>
+        <LicenseType xmlns="">License</LicenseType>
+        <ProductSpecificInformations xmlns="" />
+      </Object>
+    </Signature>
+    <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+      <SignedInfo>
+        <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+        <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1" />
+        <Reference URI="#ProductDemoLicense_2">
+          <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+          <DigestValue>e6PywkgAjnWlGMKFqLpsh1C31uX1R2trTj7lhhPfsfs=</DigestValue>
+        </Reference>
+      </SignedInfo>
+      <SignatureValue>iyNja31L2qM5mBjZIp2qLpWrT+RUVsErfjhlBexnAtBHC1ZiJ4ss9Q==</SignatureValue>
+      <Object Id="ProductDemoLicense_2">
+        <Version xmlns="">1.0</Version>
+        <Description xmlns="">XPhone Connect 8 - ANYBELL</Description>
+        <ProductInfo Code="50" Edition="0" Version="8" Bundle="0" Description="XPhone Connect 8 - ANYBELL" xmlns="" />
+        <LicenseForUser xmlns="">False</LicenseForUser>
+        <ExpirationDate xmlns=""></ExpirationDate>
+        <LicenseCount xmlns="">1</LicenseCount>
+        <LeaseTime xmlns="">14400</LeaseTime>
+        <LicenseType xmlns="">License</LicenseType>
+        <ProductSpecificInformations xmlns="" />
+      </Object>
+    </Signature>
+    <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+      <SignedInfo>
+        <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+        <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1" />
+        <Reference URI="#ProductDemoLicense_3">
+          <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+          <DigestValue>nDjmZd6F56S0mQ6fcwjHLmSpF+XbIkSBc0QtiNDGHmI=</DigestValue>
+        </Reference>
+      </SignedInfo>
+      <SignatureValue>C4V+DocgFkJ+iWrlfP0jyrqpxbNjUQcsp6EJYpgRxoEoOjT3259LGQ==</SignatureValue>
+      <Object Id="ProductDemoLicense_3">
+        <Version xmlns="">1.0</Version>
+        <Description xmlns="">XPhone Connect 8 - AUTO ATTENDANT</Description>
+        <ProductInfo Code="36" Edition="1" Version="8" Bundle="0" Description="XPhone Connect 8 - AUTO ATTENDANT" xmlns="" />
+        <LicenseForUser xmlns="">False</LicenseForUser>
+        <ExpirationDate xmlns="">08/31/2022</ExpirationDate>
+        <LicenseCount xmlns="">10</LicenseCount>
+        <LeaseTime xmlns="">14400</LeaseTime>
+        <LicenseType xmlns="">Test</LicenseType>
+        <ProductSpecificInformations xmlns="" />
+      </Object>
+    </Signature>
+    <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+      <SignedInfo>
+        <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+        <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1" />
+        <Reference URI="#ProductDemoLicense_4">
+          <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+          <DigestValue>8S+1wSgtDsu3mbrImQhRAazt94bSKdZq66lQbvPZ2z8=</DigestValue>
+        </Reference>
+      </SignedInfo>
+      <SignatureValue>inavfJpFxQkgAnaOGkuoULamUhBOKh/lOOaOPXpHbcqDnWyFCiAdzA==</SignatureValue>
+      <Object Id="ProductDemoLicense_4">
+        <Version xmlns="">1.0</Version>
+        <Description xmlns="">XPhone Connect 8 - CONTACTS</Description>
+        <ProductInfo Code="45" Edition="1" Version="8" Bundle="0" Description="XPhone Connect 8 - CONTACTS" xmlns="" />
+        <LicenseForUser xmlns="">True</LicenseForUser>
+        <ExpirationDate xmlns="">08/31/2022</ExpirationDate>
+        <LicenseCount xmlns="">100</LicenseCount>
+        <LeaseTime xmlns="">14400</LeaseTime>
+        <LicenseType xmlns="">Test</LicenseType>
+        <ProductSpecificInformations xmlns="" />
+      </Object>
+    </Signature>
+    <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+      <SignedInfo>
+        <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+        <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1" />
+        <Reference URI="#ProductDemoLicense_5">
+          <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+          <DigestValue>oYKPXOjN79P8LM7ktx7LydoaGVj/z3hr6J/+kNyikB8=</DigestValue>
+        </Reference>
+      </SignedInfo>
+      <SignatureValue>gdGKHcg0AWiDVZth1jt4ExYBYbaBSxy+jI0DfduqsFQ4JYgIGK31PA==</SignatureValue>
+      <Object Id="ProductDemoLicense_5">
+        <Version xmlns="">1.0</Version>
+        <Description xmlns="">XPhone Connect 8 - DASHBOARD</Description>
+        <ProductInfo Code="47" Edition="1" Version="8" Bundle="0" Description="XPhone Connect 8 - DASHBOARD" xmlns="" />
+        <LicenseForUser xmlns="">True</LicenseForUser>
+        <ExpirationDate xmlns="">08/31/2022</ExpirationDate>
+        <LicenseCount xmlns="">100</LicenseCount>
+        <LeaseTime xmlns="">14400</LeaseTime>
+        <LicenseType xmlns="">Test</LicenseType>
+        <ProductSpecificInformations xmlns="" />
+      </Object>
+    </Signature>
+    <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+      <SignedInfo>
+        <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+        <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1" />
+        <Reference URI="#ProductDemoLicense_6">
+          <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+          <DigestValue>CnEdMvlGvLUFIV8luCD/qoP50tQutKSGZxgLv3LjWZ0=</DigestValue>
+        </Reference>
+      </SignedInfo>
+      <SignatureValue>I0VszY3N1V7eWs58+TmBFdvPUyIo49Ion0ovB25vlSXtC2Kn++Lhaw==</SignatureValue>
+      <Object Id="ProductDemoLicense_6">
+        <Version xmlns="">1.0</Version>
+        <Description xmlns="">XPhone Connect 8 - FAX</Description>
+        <ProductInfo Code="26" Edition="1" Version="8" Bundle="0" Description="XPhone Connect 8 - FAX" xmlns="" />
+        <LicenseForUser xmlns="">True</LicenseForUser>
+        <ExpirationDate xmlns="">08/31/2022</ExpirationDate>
+        <LicenseCount xmlns="">100</LicenseCount>
+        <LeaseTime xmlns="">14400</LeaseTime>
+        <LicenseType xmlns="">Test</LicenseType>
+        <ProductSpecificInformations xmlns="" />
+      </Object>
+    </Signature>
+    <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+      <SignedInfo>
+        <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+        <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1" />
+        <Reference URI="#ProductDemoLicense_7">
+          <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+          <DigestValue>MB2ETXJk1BPS787T3BacE62laQXZPLxFjj+21y+Wrk0=</DigestValue>
+        </Reference>
+      </SignedInfo>
+      <SignatureValue>ZcBlvw1ov6IfxIsIPu/Oem91mS4YU9QLHXfDwTDOXndh3s0aDGa7Uw==</SignatureValue>
+      <Object Id="ProductDemoLicense_7">
+        <Version xmlns="">1.0</Version>
+        <Description xmlns="">XPhone Connect 8 - IP-CHANNEL</Description>
+        <ProductInfo Code="24" Edition="1" Version="8" Bundle="0" Description="XPhone Connect 8 - IP-CHANNEL" xmlns="" />
+        <LicenseForUser xmlns="">False</LicenseForUser>
+        <ExpirationDate xmlns="">08/31/2022</ExpirationDate>
+        <LicenseCount xmlns="">4</LicenseCount>
+        <LeaseTime xmlns="">14400</LeaseTime>
+        <LicenseType xmlns="">Test</LicenseType>
+        <ProductSpecificInformations xmlns="" />
+      </Object>
+    </Signature>
+    <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+      <SignedInfo>
+        <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+        <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1" />
+        <Reference URI="#ProductDemoLicense_8">
+          <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+          <DigestValue>FPlIMGP3EpwkhpUI2bqwBJIXy+KCt2OmkNUDNKRwKqg=</DigestValue>
+        </Reference>
+      </SignedInfo>
+      <SignatureValue>C+KjuJyBJM/4mtRGlowMvI7B6uaunNx43lkI/ifhvsDOF6dZvrBt9g==</SignatureValue>
+      <Object Id="ProductDemoLicense_8">
+        <Version xmlns="">1.0</Version>
+        <Description xmlns="">XPhone Connect 8 - OFFICE</Description>
+        <ProductInfo Code="0" Edition="1" Version="8" Bundle="0" Description="XPhone Connect 8 - OFFICE" xmlns="" />
+        <LicenseForUser xmlns="">True</LicenseForUser>
+        <ExpirationDate xmlns="">08/31/2022</ExpirationDate>
+        <LicenseCount xmlns="">200</LicenseCount>
+        <LeaseTime xmlns="">7776000</LeaseTime>
+        <LicenseType xmlns="">Test</LicenseType>
+        <ProductSpecificInformations xmlns="">
+          <ProductSpecificInformation Name="Flags" Value="1775" />
+        </ProductSpecificInformations>
+      </Object>
+    </Signature>
+    <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+      <SignedInfo>
+        <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+        <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1" />
+        <Reference URI="#ProductDemoLicense_9">
+          <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+          <DigestValue>bc3wdXF7QcdcjYcKJyha6h/kA2UhK1rQbg+GAATY8rc=</DigestValue>
+        </Reference>
+      </SignedInfo>
+      <SignatureValue>sTGv2xzsGW+ZRd7G2HjZDOEakXWAyFrf2B+0POIVccksNP9JLPnFhA==</SignatureValue>
+      <Object Id="ProductDemoLicense_9">
+        <Version xmlns="">1.0</Version>
+        <Description xmlns="">XPhone Connect 8 - OFFICE PLUS PACK</Description>
+        <ProductInfo Code="44" Edition="2" Version="8" Bundle="0" Description="XPhone Connect 8 - OFFICE PLUS PACK" xmlns="" />
+        <LicenseForUser xmlns="">True</LicenseForUser>
+        <ExpirationDate xmlns="">08/31/2022</ExpirationDate>
+        <LicenseCount xmlns="">100</LicenseCount>
+        <LeaseTime xmlns="">14400</LeaseTime>
+        <LicenseType xmlns="">Test</LicenseType>
+        <ProductSpecificInformations xmlns="" />
+      </Object>
+    </Signature>
+    <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+      <SignedInfo>
+        <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+        <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1" />
+        <Reference URI="#ProductDemoLicense_10">
+          <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+          <DigestValue>Yn0PTj0yaSoYBnV5wCodaaHV9xPuUb/hHNuVJ4PjnRI=</DigestValue>
+        </Reference>
+      </SignedInfo>
+      <SignatureValue>agPWDwMt8FHdWPGHEqH9APWjFfS1wf9uS5buTLbFRM5bJPqDR+T23A==</SignatureValue>
+      <Object Id="ProductDemoLicense_10">
+        <Version xmlns="">1.0</Version>
+        <Description xmlns="">XPhone Connect 8 - SERVER</Description>
+        <ProductInfo Code="9" Edition="0" Version="8" Bundle="0" Description="XPhone Connect 8 - SERVER" xmlns="" />
+        <LicenseForUser xmlns="">False</LicenseForUser>
+        <ExpirationDate xmlns="">08/31/2022</ExpirationDate>
+        <LicenseCount xmlns="">1</LicenseCount>
+        <LeaseTime xmlns="">14400</LeaseTime>
+        <LicenseType xmlns="">Test</LicenseType>
+        <ProductSpecificInformations xmlns="" />
+      </Object>
+    </Signature>
+    <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+      <SignedInfo>
+        <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+        <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1" />
+        <Reference URI="#ProductDemoLicense_11">
+          <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+          <DigestValue>O9BHAeS0fslJD66tAgh/PaPyeDVIHegVsM3xjJqZPhk=</DigestValue>
+        </Reference>
+      </SignedInfo>
+      <SignatureValue>O/RqIaPqvbC4VDyv5xpj5B5/ZzGfOcWNhwZQzrwRDHRk7piUplZ61A==</SignatureValue>
+      <Object Id="ProductDemoLicense_11">
+        <Version xmlns="">1.0</Version>
+        <Description xmlns="">XPhone Connect 8 - TAPI</Description>
+        <ProductInfo Code="21" Edition="1" Version="8" Bundle="0" Description="XPhone Connect 8 - TAPI" xmlns="" />
+        <LicenseForUser xmlns="">True</LicenseForUser>
+        <ExpirationDate xmlns="">08/31/2022</ExpirationDate>
+        <LicenseCount xmlns="">100</LicenseCount>
+        <LeaseTime xmlns="">14400</LeaseTime>
+        <LicenseType xmlns="">Test</LicenseType>
+        <ProductSpecificInformations xmlns="" />
+      </Object>
+    </Signature>
+    <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+      <SignedInfo>
+        <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+        <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1" />
+        <Reference URI="#ProductDemoLicense_12">
+          <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+          <DigestValue>Cebyi4HB9mm879m7bGqbxwqlqqWfL/OVnC+2CStNXX0=</DigestValue>
+        </Reference>
+      </SignedInfo>
+      <SignatureValue>YzGVpyqv/qCxkLNNij9ay45Yv+krSFEgsiHFptWYWKEGmS/eaiUcYw==</SignatureValue>
+      <Object Id="ProductDemoLicense_12">
+        <Version xmlns="">1.0</Version>
+        <Description xmlns="">XPhone Connect 8 - TEAMDESK</Description>
+        <ProductInfo Code="42" Edition="1" Version="8" Bundle="0" Description="XPhone Connect 8 - TEAMDESK" xmlns="" />
+        <LicenseForUser xmlns="">True</LicenseForUser>
+        <ExpirationDate xmlns="">08/31/2022</ExpirationDate>
+        <LicenseCount xmlns="">100</LicenseCount>
+        <LeaseTime xmlns="">14400</LeaseTime>
+        <LicenseType xmlns="">Test</LicenseType>
+        <ProductSpecificInformations xmlns="" />
+      </Object>
+    </Signature>
+    <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+      <SignedInfo>
+        <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+        <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1" />
+        <Reference URI="#ProductDemoLicense_13">
+          <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+          <DigestValue>lXxpM8GCDQE0z8V8FNuzBT20xyZ9/zYCb9TImnGkwSk=</DigestValue>
+        </Reference>
+      </SignedInfo>
+      <SignatureValue>rECS0Rd2WeLtZ3UZC+PN3OdwlZFmIgvsskKStXaWAlXvNMu3r+XdMg==</SignatureValue>
+      <Object Id="ProductDemoLicense_13">
+        <Version xmlns="">1.0</Version>
+        <Description xmlns="">XPhone Connect 8 - VOICEMAIL</Description>
+        <ProductInfo Code="27" Edition="1" Version="8" Bundle="0" Description="XPhone Connect 8 - VOICEMAIL" xmlns="" />
+        <LicenseForUser xmlns="">True</LicenseForUser>
+        <ExpirationDate xmlns="">08/31/2022</ExpirationDate>
+        <LicenseCount xmlns="">100</LicenseCount>
+        <LeaseTime xmlns="">14400</LeaseTime>
+        <LicenseType xmlns="">Test</LicenseType>
+        <ProductSpecificInformations xmlns="" />
+      </Object>
+    </Signature>
+  </Object>
+</Signature>

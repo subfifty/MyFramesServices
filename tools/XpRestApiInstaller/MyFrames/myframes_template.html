@@ -1,0 +1,217 @@
+<!-- Diese Header-Files geben Zugriff auf das Dashboard-Objekt "XP" -->
+<!-- DO NOT COPY TO DASHBOARD : START -->
+<head>
+  <title>Template</title>
+  <link rel="icon" type="image/png" href="./Content/Resources/outline.png" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./scripts/jquery.min.js"></script>
+  <script src="./scripts/XP.js"></script>
+  <script src="./scripts/jwt/jwt-decode.js"></script>
+</head>
+
+<!-- DO NOT COPY TO DASHBOARD : END -->
+
+<script id="LocalStorage">
+  var LS = {
+    tokenAccessToken: "accessToken",
+    tokenRefreshToken: "refreshToken",
+    tokenUserName: "userName",
+    tokenFullName: "fullName",
+    tokenLru_uid: "lru_uid",
+    tokenLru_serviceurl: "lru_serviceurl",
+    GetAccessToken: function() {
+      return localStorage.getItem(this.tokenAccessToken);
+    },
+    SetAccessToken: function(value) {
+      localStorage.setItem(this.tokenAccessToken, value);
+    },
+    GetRefreshToken: function() {
+      return localStorage.getItem(this.tokenRefreshToken);
+    },
+    SetRefreshToken: function(value) {
+      localStorage.setItem(this.tokenRefreshToken, value);
+    },
+    GetUserName: function() {
+      return localStorage.getItem(this.tokenUserName);
+    },
+    SetUserName: function(value) {
+      return localStorage.setItem(this.tokenUserName, value);
+    },
+    GetFullName: function() {
+      return localStorage.getItem(this.tokenFullName);
+    },
+    SetFullName: function(value) {
+      return localStorage.setItem(this.tokenFullName, value);
+    },
+    GetLruUid: function() {
+      return localStorage.getItem(this.tokenLru_uid);
+    },
+    SetLruUid: function(value) {
+      return localStorage.setItem(this.tokenLru_uid, value);
+    },
+    GetLruServiceUrl: function() {
+      return localStorage.getItem(this.tokenLru_serviceurl);
+    },
+    SetLruServiceUrl: function(value) {
+      return localStorage.setItem(this.tokenLru_serviceurl, value);
+    }
+  };
+</script>
+
+<script id="Authorization">
+  //
+  // Required include: src="./scripts/jwt/jwt-decode.js"
+  //
+  function IsValidToken(token) {
+    try {
+        var decoded = jwt_decode(token);
+        let now = Math.floor(Date.now() / 1000);
+        //console.log("Expiration: " + decoded.exp);
+        //console.log("Now       : " + now);
+        //console.log("Difference: " + (Math.floor(decoded.exp) - now).toString());
+        return Math.floor(decoded.exp) > now;
+    }
+    catch {
+        return false;
+    }
+  }
+
+  // Interception of XMLHttpRequest.send(). Add Authorization Header. 
+  XMLHttpRequest.prototype.realSend = XMLHttpRequest.prototype.send;
+  var newSend = function (vData) {
+    // "this" points to the XMLHttpRequest Object
+    //this.setRequestHeader("Accept", "application/json");
+    //this.setRequestHeader("Content-Type", "application/json; charset=utf-8" );
+    if (LS.GetAccessToken()) {
+        if ( IsValidToken(LS.GetAccessToken()) )
+        {
+            this.setRequestHeader("Authorization", "Bearer " + LS.GetAccessToken());
+            this.realSend(vData);
+        } else {
+            console.log("Invalid access token!");
+        }
+    } else {
+        console.log("Missing access token!");
+    }
+  };
+  XMLHttpRequest.prototype.send = newSend;    
+</script>
+
+<script id="MyFramesCommon">
+  const PresenceType = "restapi";
+
+  const MyFramesBase = GetMyFramesBase();
+  const XPhoneServer = GetXPhoneServer();
+
+  var BaseUrlPresence           = MyFramesBase + "presence/api/presence/";
+  if ( PresenceType == "restapi" ) {
+        BaseUrlPresence         = MyFramesBase + "api/presence/users/";
+  } 
+  const BaseUrlClip             = MyFramesBase + "api/clip";
+  const BaseUrlRestApiAgents    = MyFramesBase + "api/powershell/scripts/Get-TeamDeskAssignedAgents?key=TeamDeskName&value="
+  const BaseUrlRestApiHotlines  = MyFramesBase + "api/powershell/scripts/Get-TeamDeskHotlinesAndNumbers?key=UserEmail&value="
+  const BaseUrlRestApiUser      = MyFramesBase + "api/powershell/scripts/Get-XPhoneUserByAccountName?key=UserAccount&value=";
+  const BaseUrlRestApiConfig    = MyFramesBase + "api/powershell/scripts/Get-TeamDeskConfig?key=UserEmail&value=";
+  const BaseUrlRestApiDialParam = MyFramesBase + "api/powershell/scripts/Get-MainLineDialParam?key=UserAccount&value=";
+  const BaseUrlRestApiExtension = MyFramesBase + "api/powershell/scripts/Get-MainLineExtension?key=UserAccount&value=";
+  
+  function Salt() {
+      return "?salt=" + Math.random().toString(36).substr(2, 5);
+  }
+  function GetMyFramesBase() {
+    let base = "";
+    if ( window.location.protocol.toLowerCase().startsWith("http")) {
+      let path = window.location.pathname;
+      let page = path.split("/").pop();
+      path = path.replace(page, "");
+      return window.location.origin + path;
+    } else {
+      return "https://sbc.subfifty.net/xphoneconnect/myframes/"
+      //return "http://10.1.1.54/xphoneconnect/myframes/"
+    }
+  }
+  function GetXPhoneServer() {
+    let url = new URL(window.location.href);
+    if ( url.protocol.toLowerCase().startsWith("http") ) {
+      return url.protocol + "//" + url.host;
+    } else {
+      return "https://sbc.subfifty.net";
+    }
+  }
+</script>
+
+<script id="MainScript">
+
+  function INIT() {
+    let html = "<h4><strong>XPhone Server '{xps}'</strong></h4>";
+    html = html.replace("{xps}", GetXPhoneServer());
+	  html += "<u>Erfolgreich angemeldet</u>";
+	  html += "<br>";
+	  html += "User Account: " + LS.GetUserName();
+	  html += "<br>";
+	  html += "User Name: " + LS.GetFullName();
+    document.getElementById("View_LoggedIn").innerHTML = html;
+  }
+
+  var LoadingID = 0;
+  function DelayedLoading() {
+    if ( IsValidToken(LS.GetAccessToken()) ) {
+      if ( LoadingID > 0 ) {
+        console.log("Valid token found. Stop waiting.");
+        window.window.clearInterval(LoadingID);
+        LoadingID = 0;
+      }
+      //////////////////////////////////////////////////////
+      INIT();
+      ChangeView("View_LoggedIn");
+      //////////////////////////////////////////////////////
+    } else {
+      ChangeView("View_LoggedOut");
+      if ( LoadingID > 0 ) {
+        console.log("Waiting for valid token...");
+      } else {
+        console.log("Start waiting for valid token...");
+        LoadingID = window.window.setInterval(DelayedLoading, 1000);
+      }
+    }
+  }
+
+  XP.OnLoad(function () {
+    DelayedLoading();
+  })
+
+</script>
+
+<script id="ChangeView">
+  function ChangeView(viewID) {
+    let views = document.getElementsByClassName("MainView");
+    for (let i=0; i<views.length;i++) {
+      views[i].hidden = true;
+    }
+    document.getElementById(viewID).hidden = false;
+  }
+</script>
+
+<div id="View_LoggedIn" class="MainView" style="margin-left: 10px; margin-top: 20px; background-color: #ffffff;" hidden>
+  <strong>Anmeldung am XPhone Server erfolgreich!</strong>
+</div>
+
+<div id="View_LoggedOut" class="MainView" style="margin-left: 10px; margin-top: 20px; background-color: #ffffff;" hidden>
+  <i>Anmeldung am XPhone Server notwendig!</i>
+</div>
+
+<div id="View_NoTeam" class="MainView" style="margin-left: 10px; margin-top: 20px; background-color: #ffffff;" hidden >
+  <i>Der XPhone Benutzer ist keinem TeamDesk zugeordnet"</i>
+</div>
+
+<style id="body">
+  body {
+    max-width: 420px;
+    background-color: #72cbd6;
+  }
+</style>
+  

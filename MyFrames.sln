@@ -1,0 +1,85 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFramesInstaller", "tools\XpRestApiInstaller\MyFramesInstaller.csproj", "{C057775F-2953-42EB-86BB-64F4DC2A720B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlSignCreate", "tools\XmlSignCreate\XmlSignCreate.csproj", "{FA1697F9-52A6-4CB9-B0AB-78568AF1CB29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlSignVerify", "tools\XmlSignVerify\XmlSignVerify.csproj", "{BD7CB9A2-1ECD-4A00-B96E-30FE08C49727}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XPhoneLicense", "tools\XPhoneLicense\XPhoneLicense.csproj", "{BAA8E59E-1939-464A-B96F-59041BBA7066}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceXPhoneRestApi", "services\api\ServiceXPhoneRestApi.csproj", "{B4A11D74-426F-43DD-A927-D1DB75E2502A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceXPhoneContacts", "services\xphone\Applications\XPhone Integration\Webservices\VDirWebService\ServiceXPhoneContacts.csproj", "{BF2CD51D-A751-4850-B5BE-6FCBA87C75BD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JWT", "services\xphone\Applications\XPhone Integration\Webservices\JWT\JWT.csproj", "{B2879DF4-EF3B-46C4-BD8C-E21C41366C23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientAuth", "services\xphone\Applications\XPhone Integration\Webservices\ClientAuth\ClientAuth.csproj", "{9DD352F0-1BE4-48B4-98DD-D2487812159F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceXPhonePresence", "services\presence\IntegrationRestTestServerASP\ServiceXPhonePresence.csproj", "{49742AAA-3C2A-4079-A190-124D4AC1D0E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationRESTCommon", "services\presence\IntegrationRESTCommon\IntegrationRESTCommon.csproj", "{570E0680-D922-436B-8772-F0F98447DDB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationCltExport", "services\presence\IntegrationCltExport\IntegrationCltExport.csproj", "{21BEC335-EBCE-42DB-BD17-4F6303C9D704}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C057775F-2953-42EB-86BB-64F4DC2A720B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C057775F-2953-42EB-86BB-64F4DC2A720B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C057775F-2953-42EB-86BB-64F4DC2A720B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C057775F-2953-42EB-86BB-64F4DC2A720B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA1697F9-52A6-4CB9-B0AB-78568AF1CB29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA1697F9-52A6-4CB9-B0AB-78568AF1CB29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA1697F9-52A6-4CB9-B0AB-78568AF1CB29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA1697F9-52A6-4CB9-B0AB-78568AF1CB29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD7CB9A2-1ECD-4A00-B96E-30FE08C49727}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD7CB9A2-1ECD-4A00-B96E-30FE08C49727}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD7CB9A2-1ECD-4A00-B96E-30FE08C49727}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD7CB9A2-1ECD-4A00-B96E-30FE08C49727}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAA8E59E-1939-464A-B96F-59041BBA7066}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAA8E59E-1939-464A-B96F-59041BBA7066}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAA8E59E-1939-464A-B96F-59041BBA7066}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAA8E59E-1939-464A-B96F-59041BBA7066}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4A11D74-426F-43DD-A927-D1DB75E2502A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4A11D74-426F-43DD-A927-D1DB75E2502A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4A11D74-426F-43DD-A927-D1DB75E2502A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4A11D74-426F-43DD-A927-D1DB75E2502A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF2CD51D-A751-4850-B5BE-6FCBA87C75BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF2CD51D-A751-4850-B5BE-6FCBA87C75BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF2CD51D-A751-4850-B5BE-6FCBA87C75BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF2CD51D-A751-4850-B5BE-6FCBA87C75BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2879DF4-EF3B-46C4-BD8C-E21C41366C23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2879DF4-EF3B-46C4-BD8C-E21C41366C23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2879DF4-EF3B-46C4-BD8C-E21C41366C23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2879DF4-EF3B-46C4-BD8C-E21C41366C23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DD352F0-1BE4-48B4-98DD-D2487812159F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DD352F0-1BE4-48B4-98DD-D2487812159F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DD352F0-1BE4-48B4-98DD-D2487812159F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DD352F0-1BE4-48B4-98DD-D2487812159F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49742AAA-3C2A-4079-A190-124D4AC1D0E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49742AAA-3C2A-4079-A190-124D4AC1D0E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49742AAA-3C2A-4079-A190-124D4AC1D0E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49742AAA-3C2A-4079-A190-124D4AC1D0E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{570E0680-D922-436B-8772-F0F98447DDB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{570E0680-D922-436B-8772-F0F98447DDB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{570E0680-D922-436B-8772-F0F98447DDB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{570E0680-D922-436B-8772-F0F98447DDB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21BEC335-EBCE-42DB-BD17-4F6303C9D704}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21BEC335-EBCE-42DB-BD17-4F6303C9D704}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21BEC335-EBCE-42DB-BD17-4F6303C9D704}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21BEC335-EBCE-42DB-BD17-4F6303C9D704}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B7F61528-CE1D-4623-81B5-1AD9E679F423}
+	EndGlobalSection
+EndGlobal

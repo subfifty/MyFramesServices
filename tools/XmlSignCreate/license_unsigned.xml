@@ -1,0 +1,33 @@
+﻿<LicensePackage>
+  <Package Id ="{84588275-041B-4773-8318-D401A0D2A47B}" CreationTimeUTC="2022-01-08 10:45:18" Version="1.0" />
+  <Partner Name="C4B Com For Business AG" Address="Gabriele Münter Str. 5" ZIPCode="82110" City="Germering" Country="DE" EMail="support@c4b.de" Id="{BDA91239-5CDC-4C63-B21C-3AC826AEE7B7}" />
+  <Customer Name="C4B Com For Business AG" Address="Gabriele Münter Str. 5" ZIPCode="82110" City="Germering" Country="DE" EMail="support@c4b.de" Id="{86311451-74F8-4709-BF13-762FFD9D6F9D}" />
+  <Object Id="AnyBell" >
+    <Description>XPhone Connect AnyBell API</Description>
+    <ExpirationDate>9999-09-09</ExpirationDate>
+    <Version></Version>
+    <LicenseType></LicenseType>
+    <LicenseCount></LicenseCount>
+  </Object>
+  <Object Id="CallRouting" >
+    <Description>XPhone Connect CallRouting API</Description>
+    <ExpirationDate>2022-09-09</ExpirationDate>
+    <Version></Version>
+    <LicenseType></LicenseType>
+    <LicenseCount></LicenseCount>
+  </Object>
+  <Object Id="Powershell" >
+    <Description>XPhone Connect Powershell API</Description>
+    <ExpirationDate>9999-09-09</ExpirationDate>
+    <Version></Version>
+    <LicenseType></LicenseType>
+    <LicenseCount></LicenseCount>
+  </Object>
+  <Object Id="LogFile" >
+    <Description>XPhone Connect LogFile API</Description>
+    <ExpirationDate>9999-09-09</ExpirationDate>
+    <Version></Version>
+    <LicenseType></LicenseType>
+    <LicenseCount></LicenseCount>
+  </Object>
+</LicensePackage>

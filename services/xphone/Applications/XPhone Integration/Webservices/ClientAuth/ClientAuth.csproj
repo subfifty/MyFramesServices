@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9DD352F0-1BE4-48B4-98DD-D2487812159F}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ClientAuth</RootNamespace>
+    <AssemblyName>ClientAuth</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AtlasCltExport, Version=9.0.0.0, Culture=neutral, PublicKeyToken=fb3fb0d37bd72c7a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefPath\AtlasCltExport.dll</HintPath>
+    </Reference>
+    <Reference Include="AtlasLoaderCltExport, Version=9.0.0.0, Culture=neutral, PublicKeyToken=f05dec72d625cf22, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefPath\AtlasLoaderCltExport.dll</HintPath>
+    </Reference>
+    <Reference Include="CallCenterCltExport, Version=9.0.0.0, Culture=neutral, PublicKeyToken=fb3fb0d37bd72c7a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefPath\CallCenterCltExport.dll</HintPath>
+    </Reference>
+    <Reference Include="ClientConfigCltExport, Version=9.0.0.0, Culture=neutral, PublicKeyToken=882cc9b44f29045c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefPath\ClientConfigCltExport.dll</HintPath>
+    </Reference>
+    <Reference Include="ClientConnectorCltExport, Version=9.0.0.0, Culture=neutral, PublicKeyToken=fb3fb0d37bd72c7a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefPath\ClientConnectorCltExport.dll</HintPath>
+    </Reference>
+    <Reference Include="ConferenceCltExport, Version=9.0.0.0, Culture=neutral, PublicKeyToken=0d07cab8920054bf, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefPath\ConferenceCltExport.dll</HintPath>
+    </Reference>
+    <Reference Include="ContactListCltExport, Version=9.0.0.0, Culture=neutral, PublicKeyToken=882cc9b44f29045c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefPath\ContactListCltExport.dll</HintPath>
+    </Reference>
+    <Reference Include="DashboardCommon, Version=9.0.0.0, Culture=neutral, PublicKeyToken=fb3fb0d37bd72c7a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefPath\DashboardCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="FederationCltExport, Version=9.0.0.0, Culture=neutral, PublicKeyToken=fce229b0053c27c1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefPath\FederationCltExport.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIFrameworkLibrary">
+      <HintPath>..\RefPath\GUIFrameworkLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIFrameworkLibrary.Portable">
+      <HintPath>..\RefPath\GUIFrameworkLibrary.Portable.dll</HintPath>
+    </Reference>
+    <Reference Include="GUIFrameworkLibrary.Web">
+      <HintPath>..\RefPath\GUIFrameworkLibrary.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="IMCltExport, Version=9.0.0.0, Culture=neutral, PublicKeyToken=9f48e680c91094d2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefPath\IMCltExport.dll</HintPath>
+    </Reference>
+    <Reference Include="JournalCltExport, Version=9.0.0.0, Culture=neutral, PublicKeyToken=9f48e680c91094d2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefPath\JournalCltExport.dll</HintPath>
+    </Reference>
+    <Reference Include="MessageStoreCltExport, Version=9.0.0.0, Culture=neutral, PublicKeyToken=fb3fb0d37bd72c7a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefPath\MessageStoreCltExport.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=3.5.1.0, Culture=neutral, PublicKeyToken=9574470c69b3c5c7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>G:\TFS\C4B UC\Publish\XPhone 8\V8.0.x\3rd Party\Microsoft\NET\Unity3\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="PushNotificationsCltExport, Version=9.0.0.0, Culture=neutral, PublicKeyToken=d929e7faac6cc87c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefPath\PushNotificationsCltExport.dll</HintPath>
+    </Reference>
+    <Reference Include="PushNotificationsCltExport.Portable">
+      <HintPath>..\RefPath\PushNotificationsCltExport.Portable.dll</HintPath>
+    </Reference>
+    <Reference Include="RdpProxyCltExport, Version=9.0.0.0, Culture=neutral, PublicKeyToken=084be45936f018db, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefPath\RdpProxyCltExport.dll</HintPath>
+    </Reference>
+    <Reference Include="SatelliteManagementCltExport, Version=9.0.0.0, Culture=neutral, PublicKeyToken=9149bfdde6e987ab, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefPath\SatelliteManagementCltExport.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TelephonyCltExport, Version=9.0.0.0, Culture=neutral, PublicKeyToken=0d07cab8920054bf, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefPath\TelephonyCltExport.dll</HintPath>
+    </Reference>
+    <Reference Include="UMSCltExport, Version=9.0.0.0, Culture=neutral, PublicKeyToken=9f48e680c91094d2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefPath\UMSCltExport.dll</HintPath>
+    </Reference>
+    <Reference Include="UserPresenceCltExport, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b767d6df6d336b28, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefPath\UserPresenceCltExport.dll</HintPath>
+    </Reference>
+    <Reference Include="UserServiceCltExport, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b767d6df6d336b28, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefPath\UserServiceCltExport.dll</HintPath>
+    </Reference>
+    <Reference Include="VDirCltExport, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b767d6df6d336b28, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefPath\VDirCltExport.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JWT\JWT.csproj">
+      <Project>{89b671b6-268c-48d3-800d-9d9d6b88f898}</Project>
+      <Name>JWT</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
