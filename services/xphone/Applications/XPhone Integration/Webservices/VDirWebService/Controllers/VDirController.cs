@@ -235,6 +235,7 @@ namespace C4B.VDir.WebService.Controllers
             errorMessage = String.Empty;
             clientConnector = null;
 
+            /*
             if (!userName.Contains("@"))
             {
                 string xpDomain = ApiConfig.Instance.ReadAttributeValue("authorization", "XPhoneDomain", "");
@@ -245,6 +246,7 @@ namespace C4B.VDir.WebService.Controllers
                     userName += "@" + xpDomain;
                 }
             }
+            */
 
             if (string.IsNullOrEmpty(client_secret))
                 client_secret = DummyClientSecret;

@@ -43,7 +43,7 @@ namespace XPhoneRestApi
         internal void ReloadConfiguration()
         {
             return;
-
+#if RELOAD_CONFIG
             try
             {
                 //lock (padlock)
@@ -57,6 +57,7 @@ namespace XPhoneRestApi
             {
                 //apiConfigDoc = new XmlDocument();
             }
+#endif
         }
 
         public string ReadAttributeValue(string path, string attribute, string defaultValue = "")
