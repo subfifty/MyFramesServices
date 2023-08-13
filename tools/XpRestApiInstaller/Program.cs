@@ -101,7 +101,7 @@ namespace XpRestApiInstaller
         {
             try
             {
-                Console.WriteLine("XPhone REST API Installer");
+                Console.WriteLine("XPhone MyFrames Installer");
                 Console.WriteLine("=========================");
                 Console.WriteLine("");
                 Console.WriteLine("If you proceed, this program will modify your system:");
@@ -141,16 +141,16 @@ namespace XpRestApiInstaller
 
                 ServerManager serverManager = new ServerManager();
 
-                ApplicationPool appPool = null;
+                ApplicationPool appPoolApi = null;
                 ApplicationPool appPoolSites = null;
                 ApplicationPool appPoolMyFramesApi = null;
                 try
                 {
-                    appPool = serverManager.ApplicationPools.Add("XPhoneConnectApi");
+                    appPoolApi = serverManager.ApplicationPools.Add("XPhoneConnectApi");
                 }
                 catch
                 {
-                    appPool = serverManager.ApplicationPools["XPhoneConnectApi"];
+                    appPoolApi = serverManager.ApplicationPools["XPhoneConnectApi"];
                 }
                 try
                 {
@@ -168,7 +168,7 @@ namespace XpRestApiInstaller
                 {
                     appPoolMyFramesApi = serverManager.ApplicationPools["XPhoneConnectMyFramesApi"];
                 }
-                Console.WriteLine("...Application Pool: \t\t" + appPool.Name);
+                Console.WriteLine("...Application Pool: \t\t" + appPoolApi.Name);
                 Console.WriteLine("...Application Pool: \t\t" + appPoolSites.Name);
                 Console.WriteLine("...Application Pool: \t\t" + appPoolMyFramesApi.Name);
 
@@ -246,7 +246,7 @@ namespace XpRestApiInstaller
                     {
                         app = site.Applications.First(s => s.Path == "/XPhoneConnect/" + apiDir);
                     }
-                    app.ApplicationPoolName = appPool.Name;
+                    app.ApplicationPoolName = appPoolApi.Name;
                 }
 
                 apiDir = "Powershell";

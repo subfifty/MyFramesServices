@@ -7,7 +7,7 @@
     <ProjectGuid>{C057775F-2953-42EB-86BB-64F4DC2A720B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>XpRestApiInstaller</RootNamespace>
-    <AssemblyName>XpRestApiInstaller</AssemblyName>
+    <AssemblyName>MyFramesInstaller</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
