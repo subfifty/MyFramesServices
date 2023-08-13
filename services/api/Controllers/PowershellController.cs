@@ -88,6 +88,27 @@ namespace XPhoneRestApi.Controllers
             }
         }
 
+        // GET /powershell/noauth/[script]?key=[key]&value=[val]
+        [HttpGet("noauth/{script}")]
+        [AllowAnonymous]
+        public async Task<object> ExecuteScriptNoAuth(string script)
+        {
+            if (!IsValidLicense())
+                return "License not valid.";
+
+            string result = "Script requires authorizisation: " + script;
+
+            switch (script.ToLower() )
+            {
+                case "get-xphonedomain":
+                    break;
+                default:
+                    return result;
+            }
+
+            return await ExecuteScript(script);
+        }
+
         // GET /powershell/scripts/[script]?key=[key]&value=[val]
         [HttpGet("scripts/{script}")]
         public async Task<object> ExecuteScript(string script)
@@ -301,6 +322,8 @@ namespace XPhoneRestApi.Controllers
                 + @"    List all available powershell scripts on the server." + "\r\n"
                 + @"GET /powershell/scripts/[script]?key=[key]&value=[val]" + "\r\n"
                 + @"    Execute named [script] with optional parameter." + "\r\n"
+                + @"GET /powershell/noauth/[script]?key=[key]&value=[val]" + "\r\n"
+                + @"    Execute named [script] always anonymously." + "\r\n"
                 ;
 
             string helpDeprecated =
