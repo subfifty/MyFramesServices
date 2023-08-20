@@ -147,15 +147,24 @@ namespace XPhoneRestApi.Controllers
                 string client = GetRemoteIPAddress().ToString();
                 logFile.Append(string.Format("INF remoteIP='{0}' ExecuteScript('{1}')", client, script), true);
 
-                Dictionary<string, object> scriptParameters = null;
+                Dictionary<string, object> scriptParameters = new Dictionary<string, object>();
 
                 if (key != null && value != null)
                 {
-                    scriptParameters = new Dictionary<string, object>()
-                            {
-                                { key, value }
-                            };
+                    scriptParameters.Add(key, value);
                 }
+
+                ApiConfig.Instance.ReloadConfiguration();
+                string sqlHost = ApiConfig.Instance.ReadAttributeValue(ControllerName, "sqlHost");
+                string sqlDB = ApiConfig.Instance.ReadAttributeValue(ControllerName, "sqlDB");
+                string sqlUid = ApiConfig.Instance.ReadAttributeValue(ControllerName, "sqlUid");
+                string sqlPwd = ApiConfig.Instance.ReadAttributeValue(ControllerName, "sqlPwd");
+
+                if (!string.IsNullOrEmpty(sqlHost) && !scriptParameters.ContainsKey("sqlHost")) scriptParameters.Add("sqlHost", sqlHost);
+                if (!string.IsNullOrEmpty(sqlDB) && !scriptParameters.ContainsKey("sqlDB")) scriptParameters.Add("sqlDB", sqlDB);
+                if (!string.IsNullOrEmpty(sqlUid) && !scriptParameters.ContainsKey("sqlUid")) scriptParameters.Add("sqlUid", sqlUid);
+                if (!string.IsNullOrEmpty(sqlPwd) && !scriptParameters.ContainsKey("sqlPwd")) scriptParameters.Add("sqlPwd", sqlPwd);
+
                 string path = Path.Combine(PowershellControlDirectory, script + ".ps1");
                 string psScript = System.IO.File.ReadAllText(path);
                 result = await RunScript(psScript, scriptParameters);
@@ -200,17 +209,11 @@ namespace XPhoneRestApi.Controllers
                 if (string.IsNullOrEmpty(script))
                     return result;
 
-                ApiConfig.Instance.ReloadConfiguration();
-                string sqlHost = ApiConfig.Instance.ReadAttributeValue(ControllerName, "sqlHost");
-                string sqlDB = ApiConfig.Instance.ReadAttributeValue(ControllerName, "sqlDB");
-                string sqlUid = ApiConfig.Instance.ReadAttributeValue(ControllerName, "sqlUid");
-                string sqlPwd = ApiConfig.Instance.ReadAttributeValue(ControllerName, "sqlPwd");
-
                 LogFile logFile = Logfiles.Find(ControllerName);
                 string client = GetRemoteIPAddress().ToString();
                 logFile.Append(string.Format("INF remoteIP='{0}' Execute('{1}')", client, script), true);
 
-                Dictionary<string, object> scriptParameters = scriptParameters = new Dictionary<string, object>();
+                Dictionary<string, object> scriptParameters = new Dictionary<string, object>();
                 if (param != null) 
                 {
                     foreach (var p in param)
@@ -218,6 +221,12 @@ namespace XPhoneRestApi.Controllers
                         scriptParameters.Add(p.Key, p.Value);
                     }
                 }
+
+                ApiConfig.Instance.ReloadConfiguration();
+                string sqlHost = ApiConfig.Instance.ReadAttributeValue(ControllerName, "sqlHost");
+                string sqlDB = ApiConfig.Instance.ReadAttributeValue(ControllerName, "sqlDB");
+                string sqlUid = ApiConfig.Instance.ReadAttributeValue(ControllerName, "sqlUid");
+                string sqlPwd = ApiConfig.Instance.ReadAttributeValue(ControllerName, "sqlPwd");
 
                 if (!string.IsNullOrEmpty(sqlHost) && !scriptParameters.ContainsKey("sqlHost")) scriptParameters.Add("sqlHost", sqlHost);
                 if (!string.IsNullOrEmpty(sqlDB) && !scriptParameters.ContainsKey("sqlDB")) scriptParameters.Add("sqlDB", sqlDB);

@@ -142,7 +142,7 @@ namespace XpRestApiInstaller
                 ServerManager serverManager = new ServerManager();
 
                 ApplicationPool appPoolApi = null;
-                ApplicationPool appPoolSites = null;
+                ApplicationPool appPoolMyFramesSites = null;
                 ApplicationPool appPoolMyFramesApi = null;
                 try
                 {
@@ -152,25 +152,34 @@ namespace XpRestApiInstaller
                 {
                     appPoolApi = serverManager.ApplicationPools["XPhoneConnectApi"];
                 }
+                appPoolApi.ManagedRuntimeVersion = "";
+
                 try
                 {
-                    appPoolSites = serverManager.ApplicationPools.Add("XPhoneConnectSites");
+                    appPoolMyFramesSites = serverManager.ApplicationPools.Add("MyFramesSites");
                 }
                 catch
                 {
-                    appPoolSites = serverManager.ApplicationPools["XPhoneConnectSites"];
+                    appPoolMyFramesSites = serverManager.ApplicationPools["MyFramesSites"];
                 }
+
                 try
                 {
-                    appPoolMyFramesApi = serverManager.ApplicationPools.Add("XPhoneConnectMyFramesApi");
+                    appPoolMyFramesApi = serverManager.ApplicationPools.Add("MyFramesApi");
                 }
                 catch
                 {
-                    appPoolMyFramesApi = serverManager.ApplicationPools["XPhoneConnectMyFramesApi"];
+                    appPoolMyFramesApi = serverManager.ApplicationPools["MyFramesApi"];
                 }
+                appPoolMyFramesApi.ManagedRuntimeVersion = "";
+
                 Console.WriteLine("...Application Pool: \t\t" + appPoolApi.Name);
-                Console.WriteLine("...Application Pool: \t\t" + appPoolSites.Name);
+                Console.WriteLine("...Application Pool: \t\t" + appPoolMyFramesSites.Name);
                 Console.WriteLine("...Application Pool: \t\t" + appPoolMyFramesApi.Name);
+
+                try { appPoolApi.Stop(); } catch { }
+                try { appPoolMyFramesApi.Stop(); } catch { }
+                try { appPoolMyFramesSites.Stop(); } catch { }
 
                 Site site = serverManager.Sites.First(s => s.Id >= 1);
 
@@ -338,6 +347,7 @@ namespace XpRestApiInstaller
                     {
                         app = site.Applications.First(s => s.Path == "/XPhoneConnect/" + apiDir + "/presence");
                     }
+                    app.ApplicationPoolName = appPoolMyFramesSites.Name;
 
                     app = null;
                     try
@@ -348,6 +358,7 @@ namespace XpRestApiInstaller
                     {
                         app = site.Applications.First(s => s.Path == "/XPhoneConnect/" + apiDir + "/xphone");
                     }
+                    app.ApplicationPoolName = appPoolMyFramesSites.Name;
 
                     app = null;
                     try
@@ -362,10 +373,14 @@ namespace XpRestApiInstaller
                 }
 
                 serverManager.CommitChanges();
+
+                try { appPoolApi.Start(); } catch { }
+                try { appPoolMyFramesApi.Start(); } catch { }
+                try { appPoolMyFramesSites.Start(); } catch { }
+
             }
             finally
             {
-                
                 Console.WriteLine("\r\nPress <Enter> to exit.");
                 Console.ReadKey();
             }

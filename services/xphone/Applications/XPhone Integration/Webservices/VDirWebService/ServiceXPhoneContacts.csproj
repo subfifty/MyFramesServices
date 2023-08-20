@@ -297,6 +297,7 @@
     <Content Include="C4B Atlas Resource 2.0.csp" />
     <Content Include="..\..\..\..\..\shared\ApiConfig\config.xml.install">
       <Link>Shared_ApiConfig\config.xml.install</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\PublishProfiles\precompiled.pubxml" />
     <None Include="Properties\PublishProfiles\temp_precompiled.pubxml" />

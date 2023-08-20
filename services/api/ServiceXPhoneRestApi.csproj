@@ -60,11 +60,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\shared\ApiConfig\config.xml.install" Link="Shared_ApiConfig\config.xml.install" />
+    <Content Include="..\shared\ApiConfig\config.xml.install" Link="Shared_ApiConfig\config.xml.install">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\shared\ApiLicense\license.xml.install" Link="Shared_ApiLicense\license.xml.install">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="REM echo $(ProjectDir)..\..\..\_Build\MyFrames\api&#xD;&#xA;copy /Y &quot;$(TargetDir)$(TargetName).dll&quot; &quot;$(ProjectDir)..\..\..\_Build\MyFrames\api\&quot;&#xD;&#xA;copy /Y &quot;$(TargetDir)$(TargetName).exe&quot; &quot;$(ProjectDir)..\..\..\_Build\MyFrames\api\&quot;&#xD;&#xA;" />
+    <Exec Command="REM echo $(ProjectDir)..\..\..\_Build\MyFrames\api&#xD;&#xA;copy /Y &quot;$(TargetDir)$(TargetName).dll&quot; &quot;$(ProjectDir)..\..\..\_Build\MyFrames\api\&quot;&#xD;&#xA;copy /Y &quot;$(TargetDir)$(TargetName).exe&quot; &quot;$(ProjectDir)..\..\..\_Build\MyFrames\api\&quot;&#xD;&#xA;&#xD;&#xA;xcopy /Y &quot;$(TargetDir)Shared_ApiConfig\*.install&quot; &quot;$(ProjectDir)..\..\..\_Build\ApiConfig\&quot;&#xD;&#xA;xcopy /Y &quot;$(TargetDir)Shared_ApiLicense\*.install&quot; &quot;$(ProjectDir)..\..\..\_Build\ApiLicense\&quot;&#xD;&#xA;" />
   </Target>
 
 
