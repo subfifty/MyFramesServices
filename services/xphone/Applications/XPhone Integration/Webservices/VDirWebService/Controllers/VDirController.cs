@@ -426,7 +426,6 @@ namespace C4B.VDir.WebService.Controllers
             }
         }
 
-
         private string GetBody(HttpRequestBase request)
         {
             var requestStream = request?.InputStream;
@@ -670,7 +669,7 @@ namespace C4B.VDir.WebService.Controllers
         }
 
         [HttpGet]
-        //[JWTAccess]
+        [JWTAccess]
         public ActionResult Query()
         {
             // claims["exp"]

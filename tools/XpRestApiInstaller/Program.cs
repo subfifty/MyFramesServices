@@ -73,6 +73,23 @@ namespace XpRestApiInstaller
             catch { }
         }
 
+        private static void VerifyLicenseFileExists(string targetPath)
+        {
+            string targetFile = Path.Combine(targetPath, "license.xml");
+            string sourceFile = Path.Combine(targetPath, "license.xml.install");
+            try
+            {
+                if (!File.Exists(targetFile))
+                {
+                    if (File.Exists(sourceFile))
+                    {
+                        File.Copy(sourceFile, targetFile, true);
+                    }
+                }
+            }
+            catch { }
+        }
+
         private static void CopyFilesRecursively(string sourcePath, string targetPath)
         {
             //Now Create all of the directories
@@ -282,6 +299,7 @@ namespace XpRestApiInstaller
                     string ProgramData = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
                     Directory.CreateDirectory(Path.Combine(ProgramData, "C4B\\" + apiDir));
                     CopyFilesRecursively(Path.Combine(AssemblyDirectory, apiDir), Path.Combine(ProgramData, "C4B\\" + apiDir));
+                    VerifyLicenseFileExists(Path.Combine(ProgramData, "C4B\\" + apiDir));
                 }
 
                 apiDir = "ApiConfig";
