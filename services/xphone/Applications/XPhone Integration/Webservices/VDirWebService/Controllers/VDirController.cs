@@ -27,6 +27,9 @@ using System.IO;
 
 using Newtonsoft.Json;
 using XPhoneRestApi;
+using System.Web.Optimization;
+using System.Net;
+using System.Collections.Specialized;
 
 namespace C4B.VDir.WebService.Controllers
 {
@@ -386,6 +389,43 @@ namespace C4B.VDir.WebService.Controllers
 
     public class VDirController : Controller
     {
+        private static string ControllerName = "vdir";
+
+        internal IPAddress GetRemoteIPAddress(bool allowForwarded = true)
+        {
+            if (allowForwarded)
+            {
+                // if you are allowing these forward headers, please ensure you are restricting context.Connection.RemoteIpAddress
+                // to cloud flare ips: https://www.cloudflare.com/ips/
+                try
+                {
+                    string header = HttpContext.Request.Headers["CF-Connecting-IP"].ToString();
+                    if (IPAddress.TryParse(header, out IPAddress ip))
+                    {
+                        return ip;
+                    }
+                }
+                catch { }
+                try
+                {
+                    string header = HttpContext.Request.Headers["X-Forwarded-For"].ToString();
+                    if (IPAddress.TryParse(header, out IPAddress ip))
+                    {
+                        return ip;
+                    }
+                }
+                catch { }
+            }
+            try
+            {
+                return IPAddress.Parse(HttpContext.Request.UserHostAddress);
+            }
+            catch
+            {
+                return IPAddress.Parse("0.0.0.0");
+            }
+        }
+
 
         private string GetBody(HttpRequestBase request)
         {
@@ -630,13 +670,14 @@ namespace C4B.VDir.WebService.Controllers
         }
 
         [HttpGet]
-        [JWTAccess]
+        //[JWTAccess]
         public ActionResult Query()
         {
             // claims["exp"]
             // claims["UserGuid"]
 
             Contact contact = new Contact();
+            string query = "xxx";
 
             bool withPhoto = true;
             if (Request.Unvalidated.QueryString["withPhoto"] != null)
@@ -657,7 +698,10 @@ namespace C4B.VDir.WebService.Controllers
             if (Request.Unvalidated.QueryString["phone"] != null)
             {
                 phone = Request.Unvalidated.QueryString["phone"];
+                if ( phone.StartsWith(" ") )
+                    phone = phone.Replace(" ", "00");
                 contact.WorkPhone = phone;
+                query = phone;
             }
 
             string full = "";
@@ -681,6 +725,11 @@ namespace C4B.VDir.WebService.Controllers
                 withPhoto = true;
             }
 
+            LogFile logFile = Logfiles.Find(ControllerName);
+            string client = GetRemoteIPAddress().ToString();
+            logFile.Append(string.Format("INF remoteIP='{0}' Query('{1}')", client, query), true);
+
+
             List<Contact> contactParams = new List<Contact>();
             contactParams.Add(contact);
 
@@ -694,7 +743,7 @@ namespace C4B.VDir.WebService.Controllers
         {
             return VerifyResult();
         }
-
+        
         [HttpGet]
         public string Get()
         {

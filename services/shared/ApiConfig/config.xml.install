@@ -10,29 +10,32 @@
     BaseAPIUrl="https://c4b.zendesk.com/api/v2"
     BearerToken="7bdb406ca0fedeb82d41a884bd85fdc9325776b2deb81ad08bcf8d4f54a27ded" 
   ></zendesk>
-  <presence Logging="Off"
-    Authorization="none"
-    BaseUrl="http://10.1.1.54/XPhoneConnect/PresenceApi"
-    BaseAPIUrl="http://10.1.1.54/XPhoneConnect/PresenceApi/api/presence"
-    _BaseUrl="https://sbc.subfifty.net/XPhoneConnect/myframes/Presence"
-    _BaseAPIUrl="https://sbc.subfifty.net/XPhoneConnect/myframes/Presence/api/presence"
-    __BaseUrl="http://localhost/XPhoneConnect/PresenceApi"
-    __BaseAPIUrl="http://localhost/XPhoneConnect/PresenceApi/api/presence"            
+  <presence Logging="On"
+    Authorization="jwt"
+    BaseUrl="http://localhost/XPhoneConnect/myframes/Presence"
+    BaseAPIUrl="http://localhost/XPhoneConnect/myframes/Presence/api/presence"
   ></presence>
   <powershell Logging="On"
-    Authorization="none"
-  ></powershell>
-  <anybell Logging="On"
     Authorization="jwt"
-  ></anybell>
+	sqlHost="(local)\XPCONNECT"
+	sqlDB="XPDATA"
+	sqlUid="sa"
+	sqlPwd="52145C85E4164eba8ABF870278BB3478"
+  ></powershell>
+  <logfile Logging="On"
+    Authorization="none"
+  ></logfile>
   <vdir Logging="On"
     Authorization="none"
   ></vdir>
+  <anybell Logging="On"
+    Authorization="none"
+  ></anybell>
   <callrouting Logging="On"
-    Authorization="jwt"
+    Authorization="none"
   ></callrouting>
   <odbc Logging="Off"
-    Authorization="none"
+    Authorization="jwt"
   >
     <xe
       uid="SYSTEM"
@@ -48,9 +51,8 @@
     ></v9server>
   </odbc>
   <authorization Logging="On"
-    VerifyAccessUrl="https://sbc.subfifty.net/XPhoneConnect/myframes/xphone/auth/Verify"
+    VerifyAccessUrl="http://localhost/XPhoneConnect/myframes/xphone/auth/Verify"
     BearerToken="1eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2ODk2MTExMjYsIklkZW50aXR5VG9rZW4iOiIxMDA3MDkyMjMxIiwiVXNlckd1aWQiOiJmYTI4ZjdjYi0wYTdjLTQxNGUtODVjYS00NjdjN2QwOTA1MWEiLCJGdWxsTmFtZSI6IjU1NSBUZXN0IiwiVXNlck5hbWUiOiJ0ZXN0QHY5LnN1YmZpZnR5LmRlIn0.a_U-Wz_ZsExJovoyncMTWJmXGSoCaC8nJjayIB-n7Rg" 
     Authorization="jwt"
-	  XPhoneDomain="v9.subfifty.de"
   ></authorization>
 </configuration>

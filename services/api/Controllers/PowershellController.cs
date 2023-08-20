@@ -11,11 +11,20 @@ using System.Text;
 using System.Collections.Generic;
 using System.Management.Automation;
 using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json;
+using System.Security;
+using System.Security.Cryptography;
 
 #if POWERSHELL_CONTROLLER
 
 namespace XPhoneRestApi.Controllers
 {
+    public class PowershellRequest
+    {
+        public string script { get; set; }
+        public Dictionary<string, string> param { get; set; }
+    }
+
     [Route("[controller]")]
     [ApiController]
     [Authorize("powershell")]
@@ -77,7 +86,7 @@ namespace XPhoneRestApi.Controllers
 
             try
             {
-                object tryJson = JsonSerializer.Deserialize<object>(result);
+                object tryJson = System.Text.Json.JsonSerializer.Deserialize<object>(result);
                 // Return as "Content-Type: application/json"
                 return tryJson;
             }
@@ -159,7 +168,75 @@ namespace XPhoneRestApi.Controllers
 
             try
             {
-                object tryJson = JsonSerializer.Deserialize<object>(result);
+                object tryJson = System.Text.Json.JsonSerializer.Deserialize<object>(result);
+                // Return as "Content-Type: application/json"
+                return tryJson;
+            }
+            catch
+            {
+                // Return as "Content-Type: text/plain"
+                return result;
+            }
+        }
+
+        // POST /powershell/execute
+        [HttpPost("execute")]
+#if DEBUG
+        [AllowAnonymous]
+#endif
+        public async Task<object> ExecuteScriptPOST([FromBody] object body)
+        {
+            if (!IsValidLicense())
+                return "License not valid.";
+
+            PowershellRequest request = System.Text.Json.JsonSerializer.Deserialize<PowershellRequest>(body.ToString());
+
+            string result = "failed";
+            string script = request.script;
+            Dictionary<string, string> param = request.param;
+
+            try
+            {
+                if (string.IsNullOrEmpty(script))
+                    return result;
+
+                ApiConfig.Instance.ReloadConfiguration();
+                string sqlHost = ApiConfig.Instance.ReadAttributeValue(ControllerName, "sqlHost");
+                string sqlDB = ApiConfig.Instance.ReadAttributeValue(ControllerName, "sqlDB");
+                string sqlUid = ApiConfig.Instance.ReadAttributeValue(ControllerName, "sqlUid");
+                string sqlPwd = ApiConfig.Instance.ReadAttributeValue(ControllerName, "sqlPwd");
+
+                LogFile logFile = Logfiles.Find(ControllerName);
+                string client = GetRemoteIPAddress().ToString();
+                logFile.Append(string.Format("INF remoteIP='{0}' Execute('{1}')", client, script), true);
+
+                Dictionary<string, object> scriptParameters = scriptParameters = new Dictionary<string, object>();
+                if (param != null) 
+                {
+                    foreach (var p in param)
+                    {
+                        scriptParameters.Add(p.Key, p.Value);
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(sqlHost) && !scriptParameters.ContainsKey("sqlHost")) scriptParameters.Add("sqlHost", sqlHost);
+                if (!string.IsNullOrEmpty(sqlDB) && !scriptParameters.ContainsKey("sqlDB")) scriptParameters.Add("sqlDB", sqlDB);
+                if (!string.IsNullOrEmpty(sqlUid) && !scriptParameters.ContainsKey("sqlUid")) scriptParameters.Add("sqlUid", sqlUid);
+                if (!string.IsNullOrEmpty(sqlPwd) && !scriptParameters.ContainsKey("sqlPwd")) scriptParameters.Add("sqlPwd", sqlPwd);
+
+                string path = Path.Combine(PowershellControlDirectory, script + ".ps1");
+                string psScript = System.IO.File.ReadAllText(path);
+                result = await RunScript(psScript, scriptParameters);
+            }
+            catch (Exception ex)
+            {
+                result = ex.Message;
+                return result; ;
+            }
+
+            try
+            {
+                object tryJson = System.Text.Json.JsonSerializer.Deserialize<object>(result);
                 // Return as "Content-Type: application/json"
                 return tryJson;
             }
@@ -324,6 +401,8 @@ namespace XPhoneRestApi.Controllers
                 + @"    Execute named [script] with optional parameter." + "\r\n"
                 + @"GET /powershell/noauth/[script]?key=[key]&value=[val]" + "\r\n"
                 + @"    Execute named [script] always anonymously." + "\r\n"
+                + @"POST /powershell/execute" + "\r\n"
+                + @"    Execute script as defined in request body." + "\r\n"
                 ;
 
             string helpDeprecated =

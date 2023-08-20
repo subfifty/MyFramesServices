@@ -92,7 +92,11 @@ namespace XPhoneRestApi
             get
             {
 #if DEBUG
-                string path = Path.Combine(AssemblyDirectory, @"ApiConfig\config.xml");
+                string path = Path.Combine(AssemblyDirectory, @"Shared_ApiConfig\config.xml");
+                if (!File.Exists(path))
+                {
+                    path = @"D:\SUBFIFTY\MyFramesServices\services\shared\ApiConfig\config.xml";
+                }
 #else
                 string path = Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), @"C4B\ApiConfig\config.xml");
 #endif

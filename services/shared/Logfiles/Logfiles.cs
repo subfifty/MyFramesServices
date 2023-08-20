@@ -1,127 +1,9 @@
-﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using System;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace XPhoneRestApi.Controllers
+namespace XPhoneRestApi
 {
-    //=======================================================================
-    // Download Controller
-    //=======================================================================
-    [Route("[controller]")]
-    [ApiController]
-    public class DownloadController : XPhoneControllerBase
-    {
-        private async Task<Stream> GenerateStreamFromString(string s)
-        {
-            var stream = new MemoryStream();
-            var writer = new StreamWriter(stream);
-            await writer.WriteAsync(s);
-            await writer.FlushAsync();
-            stream.Position = 0;
-            return stream;
-        }
-
-        [HttpGet("{name}")]
-        public async Task<IActionResult> Download(string name)
-        {
-            LogFile logFile = Logfiles.Find(name);
-
-            Stream stream = await GenerateStreamFromString(logFile.ReadAll());
-
-            if (stream == null)
-               return NotFound(); // returns a NotFoundResult with Status404NotFound response.
-
-            return File(stream, "application/octet-stream", name + ".log"); // returns a FileStreamResult
-        }
-    }
-
-    //=======================================================================
-    // Logfile Controller
-    //=======================================================================
-    [Route("[controller]")]
-    [ApiController]
-    public class LogfileController : ControllerBase
-    {
-        private static LicenseObject ControllerLicense = ApiLicense.Instance.ParseLicenseObject("LogFile");
-
-        private string ShowHelp()
-        {
-            string help =
-                  @"/LogFile/{name}/{cmd}[?{options}]" + "\r\n" 
-                + @"{name} Name der Logdatei ohne Extension. Ablage in '%CommonProgramData%\C4B\LogFiles\{name}.Log'" + "\r\n"
-                + @"{cmd} list, append, read, delete, download";
-            return help;
-        }
-
-        // GET
-        [HttpGet]
-        public string Get()
-        {
-            return ShowHelp();
-        }
-
-        // GET: cmd
-        [HttpGet("{cmd}")]
-        public string Get(string cmd)
-        {
-            if (!IsValidLicense())
-                return "License not valid.";
-
-            if ( cmd.ToLower() == "list" )
-            {
-                return Logfiles.List();
-            }
-            return Get("default", cmd);
-        }
-
-        // GET name/cmd
-        [HttpGet("{name}/{cmd}")]
-        public string Get(string name, string cmd)
-        {
-            if (!IsValidLicense())
-                return "License not valid.";
-
-            LogFile logFile = Logfiles.Find(name);
-            switch (cmd)
-            {
-                case "append":
-                    if (Request.QueryString.HasValue)
-                    {
-                        string q = this.Request.QueryString.ToString().Substring(1);
-                        q = System.Web.HttpUtility.UrlDecode(q);
-                        logFile.Append(q);
-                    }
-                    break;
-
-                case "read":
-                    return logFile.ReadAll();
-
-                case "download":
-                    this.Response.Redirect(this.Request.PathBase + "/" + cmd + "/" + name);
-                    break;
-
-                case "delete":
-                    logFile.Delete();
-                    break;
-            }
-            return "Logile: name = " + name + ",  cmd = " + cmd;
-        }
-
-        private bool IsValidLicense()
-        {
-            //return ControllerLicense.valid;
-
-            // Logfile Controller is always allowed for now!
-            return true;
-        }
-    }
-
-#if LOGFILES
-    #region class Logfiles
     public class Logfiles
     {
         private static Dictionary<string, LogFile> logFiles;
@@ -183,9 +65,7 @@ namespace XPhoneRestApi.Controllers
             return result;
         }
     }
-    #endregion
 
-    #region class LogFile
     public class LogFile
     {
         private string m_Path;
@@ -257,7 +137,7 @@ namespace XPhoneRestApi.Controllers
             {
                 lock (sw)
                 {
-                    if ( WithTimeStamp )
+                    if (WithTimeStamp)
                     {
                         string dt = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff");
                         message = dt + " " + message;
@@ -288,6 +168,4 @@ namespace XPhoneRestApi.Controllers
             }
         }
     }
-    #endregion
-#endif
 }

@@ -257,7 +257,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\..\..\shared\ApiConfig\ApiConfig.cs">
-      <Link>ApiConfig\ApiConfig.cs</Link>
+      <Link>Shared_ApiConfig\ApiConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\..\shared\Logfiles\Logfiles.cs">
+      <Link>Shared_Logfiles\Logfiles.cs</Link>
     </Compile>
     <Compile Include="..\..\..\..\_Brand\_trademark.cs">
       <Link>_trademark.cs</Link>
@@ -286,12 +289,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\..\..\..\shared\ApiConfig\config.xml">
-      <Link>ApiConfig\config.xml</Link>
+      <Link>Shared_ApiConfig\config.xml</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="C4B Atlas Resource 2.0.csp" />
+    <Content Include="..\..\..\..\..\shared\ApiConfig\config.xml.install">
+      <Link>Shared_ApiConfig\config.xml.install</Link>
+    </Content>
     <None Include="Properties\PublishProfiles\precompiled.pubxml" />
     <None Include="Properties\PublishProfiles\temp_precompiled.pubxml" />
     <None Include="Properties\PublishProfiles\vc4buc2.corp.c4b.de.pubxml" />
@@ -342,7 +348,9 @@
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>8080</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:8080</IISUrl>
+          <IISUrl>http://localhost:8080/vdir/query?phone=+49898866558</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:8080/vdir/query?phone=12345</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -353,30 +361,16 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>echo off
-rem Setzen der Umgebungsvariablen
-rem __BRANCHPATH sollte auf das Branch-Verzeichnis zeigen z.B.: E:\TFS\C4B UC\Main
-SET __BRANCHPATH=$(ProjectDir)..\..\..\..
-SET __SHARETELPATH=%25__BRANCHPATH%25\_Share\Telephone\Release
-SET __SERVERPATH=%25__BRANCHPATH%25\_Build\$(ConfigurationName)\server
+    <PostBuildEvent>copy /Y "$(TargetDir)$(TargetFileName)" "$(SolutionDir)..\_Build\MyFrames\xphone\bin\"
+xcopy /Y "$(TargetDir)JWT.*" "$(SolutionDir)..\_Build\MyFrames\xphone\bin\"
+xcopy /Y "$(TargetDir)Antlr3.Runtime.dll" "$(SolutionDir)..\_Build\MyFrames\xphone\bin\"
 
-rem Verzeichnisinitialisierung
-if NOT EXIST "%25__BRANCHPATH%25\_Build" md "%25__BRANCHPATH%25\_Build"
-if NOT EXIST "%25__BRANCHPATH%25\_Build\$(ConfigurationName)" md "%25__BRANCHPATH%25\_Build\$(ConfigurationName)"
-if NOT EXIST "%25__BRANCHPATH%25\_Share" md "%25__BRANCHPATH%25\_Share"
-if NOT EXIST "%25__BRANCHPATH%25\_Share\Telephone" md "%25__BRANCHPATH%25\_Share\Telephone"
-if NOT EXIST "%25__BRANCHPATH%25\_Share\Telephone\Release" md "%25__BRANCHPATH%25\_Share\Telephone\Release"
-if NOT EXIST "%25__SERVERPATH%25" md "%25__SERVERPATH%25"
+xcopy /Y "$(TargetDir)Newtonsoft.Json.*" "$(SolutionDir)..\_Build\MyFrames\xphone\bin\"
+xcopy /Y "$(TargetDir)System.Net.Http.Formatting.*" "$(SolutionDir)..\_Build\MyFrames\xphone\bin\"
+xcopy /Y "$(TargetDir)System.Web.Optimization.*" "$(SolutionDir)..\_Build\MyFrames\xphone\bin\"
+xcopy /Y "$(TargetDir)WebGrease.*" "$(SolutionDir)..\_Build\MyFrames\xphone\bin\"
 
-rem Kopieren der Dateien
-xcopy "%25__SHARETELPATH%25\XpTel3Net.dll" "$(TargetDir)" /S/C/Y/D
-xcopy "$(TargetDir)*$(TargetExt)" "%25__SERVERPATH%25\" /S/C/Y/D
-xcopy "$(TargetDir)*.pdb" "%25__SERVERPATH%25\" /S/C/Y/D
-
-rem Löschen der Umgebungsvariablen
-SET __SHARETELPATH=
-SET __BRANCHPATH=
-SET __SERVERPATH=
+copy /Y "$(ProjectDir)web.config" "$(SolutionDir)..\_Build\MyFrames\xphone\web.config.install"
 </PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\..\..\_Production\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\..\_Production\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
