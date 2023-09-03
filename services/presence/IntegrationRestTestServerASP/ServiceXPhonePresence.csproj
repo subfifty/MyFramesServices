@@ -331,8 +331,11 @@
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>REM copy /Y "$(TargetDir)$(TargetFileName)" "$(SolutionDir)..\_Build\MyFrames\presence\bin\"
+    <PostBuildEvent>REM V9
 xcopy /Y "$(TargetDir)Integration*.dll" "$(SolutionDir)..\_Build\MyFrames\presence\bin\"
+
+REM V10
+xcopy /Y "$(TargetDir)Integration*.dll" "$(SolutionDir)..\_Build_v10\MyFrames\presence\bin\"
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

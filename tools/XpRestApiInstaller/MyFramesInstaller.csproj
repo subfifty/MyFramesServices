@@ -124,8 +124,15 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y "$(TargetDir)$(TargetFileName)" "$(SolutionDir)..\_Build\"
+    <PostBuildEvent>REM V9
+xcopy /Y "$(TargetDir)$(TargetFileName)" "$(SolutionDir)..\_Build\"
 xcopy /Y "$(TargetDir)$(TargetFileName).config" "$(SolutionDir)..\_Build\"
-xcopy /Y "$(TargetDir)Microsoft.Web.Administration.dll" "$(SolutionDir)..\_Build\"</PostBuildEvent>
+xcopy /Y "$(TargetDir)Microsoft.Web.Administration.dll" "$(SolutionDir)..\_Build\"
+
+REM V10
+xcopy /Y "$(TargetDir)$(TargetFileName)" "$(SolutionDir)..\_Build_v10\"
+xcopy /Y "$(TargetDir)$(TargetFileName).config" "$(SolutionDir)..\_Build_v10\"
+xcopy /Y "$(TargetDir)Microsoft.Web.Administration.dll" "$(SolutionDir)..\_Build_v10\"
+</PostBuildEvent>
   </PropertyGroup>
 </Project>
