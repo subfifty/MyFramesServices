@@ -3,7 +3,7 @@
     <dmz Logging="Off"
         DMZMode="0"
         ApiEndpoint="http://10.1.1.54/XPhoneConnect/myframes/api"
-        AuthEndpoint="http://10.1.1.54/XPhoneConnect/myframes/xphone/auth"
+        AuthEndpoint="http://10.1.1.54/XPhoneConnect/myframes/api/auth"
     ></dmz>
     <authorization Logging="Off"
         Authorization="jwt"

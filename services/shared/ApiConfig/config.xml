@@ -3,7 +3,7 @@
   <dmz Logging="Off"
     DMZMode="1"
     ApiEndpoint="http://10.1.1.54/XPhoneConnect/myframes/api"
-    AuthEndpoint="http://10.1.1.54/XPhoneConnect/myframes/xphone/auth"
+    AuthEndpoint="http://10.1.1.54/XPhoneConnect/myframes/api/auth"
   ></dmz>
   <authorization Logging="Off"
     Authorization="jwt"
@@ -13,8 +13,8 @@
   ></authorization>
   <presence Logging="Off"
     Authorization="none"
-    BaseUrl="http://10.1.1.54/XPhoneConnect/PresenceApi"
-    BaseAPIUrl="http://10.1.1.54/XPhoneConnect/PresenceApi/api/presence"
+    BaseUrl="http://10.1.1.54/XPhoneConnect/myframes/presence"
+    BaseAPIUrl="http://10.1.1.54/XPhoneConnect/myframes/presence/api/presence"
   ></presence>
   <powershell Logging="On"
     Authorization="jwt"
