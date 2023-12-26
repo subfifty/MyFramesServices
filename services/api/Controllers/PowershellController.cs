@@ -1,19 +1,11 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
-using System.Text.Json;
-using System.Threading;
 using Microsoft.AspNetCore.Http;
-using System.Net;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Text;
 using System.Collections.Generic;
 using System.Management.Automation;
 using Microsoft.AspNetCore.Authorization;
-using Newtonsoft.Json;
-using System.Security;
-using System.Security.Cryptography;
 
 #if POWERSHELL_CONTROLLER
 
@@ -38,6 +30,9 @@ namespace XPhoneRestApi.Controllers
         [AllowAnonymous]
         public string Get()
         {
+            if (ApiConfig.Instance.RunningInDMZ())
+                return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
+
             LogFile logFile = Logfiles.Find(ControllerName);
             string client = GetRemoteIPAddress().ToString();
             logFile.Append(string.Format("INF remoteIP='{0}' ShowHelp()", client), true);
@@ -48,6 +43,9 @@ namespace XPhoneRestApi.Controllers
         [HttpGet("license")]
         public JsonResult GetLicense()
         {
+            if (ApiConfig.Instance.RunningInDMZ())
+                return new JsonResult(ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ);
+
             LogFile logFile = Logfiles.Find(ControllerName);
             string client = GetRemoteIPAddress().ToString();
             logFile.Append(string.Format("INF remoteIP='{0}' GetLicense()", client), true);
@@ -66,6 +64,9 @@ namespace XPhoneRestApi.Controllers
         [HttpGet("scripts")]
         public object GetScripts()
         {
+            if ( ApiConfig.Instance.RunningInDMZ() )
+                return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
+
             if (!IsValidLicense())
                 return "License not valid.";
 
@@ -102,6 +103,11 @@ namespace XPhoneRestApi.Controllers
         [AllowAnonymous]
         public async Task<object> ExecuteScriptNoAuth(string script)
         {
+            if ( ApiConfig.Instance.RunningInDMZ() )
+            {
+                return Relay_ApiEndpoint_GET();
+            }
+
             if (!IsValidLicense())
                 return "License not valid.";
 
@@ -122,6 +128,11 @@ namespace XPhoneRestApi.Controllers
         [HttpGet("scripts/{script}")]
         public async Task<object> ExecuteScript(string script)
         {
+            if (ApiConfig.Instance.RunningInDMZ())
+            {
+                return Relay_ApiEndpoint_GET();
+            }
+
             if (!IsValidLicense())
                 return "License not valid.";
 
@@ -261,6 +272,9 @@ namespace XPhoneRestApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<string> Get(string cmd)
         {
+            if (ApiConfig.Instance.RunningInDMZ())
+                return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
+
             if (!IsValidLicense())
                 return "License not valid.";
 
@@ -434,6 +448,7 @@ namespace XPhoneRestApi.Controllers
         {
             return ControllerLicense.valid;
         }
+
     }
 }
 

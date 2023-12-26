@@ -19,6 +19,9 @@ namespace XPhoneRestApi.Controllers
         [HttpGet]
         public string GetHelp()
         {
+            if (ApiConfig.Instance.RunningInDMZ())
+                return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
+
             LogFile logFile = Logfiles.Find(ControllerName);
             string client = GetRemoteIPAddress().ToString();
             logFile.Append(string.Format("INF remoteIP='{0}' ShowHelp()", client), true);
@@ -206,6 +209,9 @@ namespace XPhoneRestApi.Controllers
 
         private ContentResult Execute_GET(string query = "")
         {
+            if (ApiConfig.Instance.RunningInDMZ())
+                return this.Content(ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ, "application/json");
+
             ApiConfig.Instance.ReloadConfiguration();
             string Base_API_URL = ApiConfig.Instance.ReadAttributeValue("zammad", "BaseAPIUrl");
             string Bearer_Token = ApiConfig.Instance.ReadAttributeValue("zammad", "BearerToken");

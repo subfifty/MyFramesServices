@@ -44,7 +44,13 @@
     <Content Include="..\shared\ApiConfig\config.xml" Link="Shared_ApiConfig\config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\shared\ApiConfig\config.xml.install" Link="Shared_ApiConfig\config.xml.install">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\shared\ApiLicense\license.xml" Link="Shared_ApiLicense\license.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\shared\ApiLicense\license.xml.install" Link="Shared_ApiLicense\license.xml.install">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -57,18 +63,6 @@
     <Folder Include="Shared_Logfiles\" />
     <Folder Include="Shared_ApiLicense\" />
     <Folder Include="Shared_ApiConfig\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="..\shared\ApiConfig\config.xml.install" Link="Shared_ApiConfig\config.xml.install">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="..\shared\ApiLicense\license.xml.install" Link="Shared_ApiLicense\license.xml.install">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">

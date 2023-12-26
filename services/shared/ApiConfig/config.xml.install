@@ -1,58 +1,64 @@
 <!-- C:\ProgramData\C4B\ApiConfig -->
 <configuration>
-	<zammad Logging="Off"
+    <dmz Logging="Off"
+        DMZMode="0"
+        ApiEndpoint="http://10.1.1.54/XPhoneConnect/myframes/api"
+        AuthEndpoint="http://10.1.1.54/XPhoneConnect/myframes/xphone/auth"
+    ></dmz>
+    <authorization Logging="Off"
+        Authorization="jwt"
+        AuthEndpoint="http://10.1.1.54/XPhoneConnect/myframes/xphone/auth"
+        BearerToken="1eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2ODk2MTExMjYsIklkZW50aXR5VG9rZW4iOiIxMDA3MDkyMjMxIiwiVXNlckd1aWQiOiJmYTI4ZjdjYi0wYTdjLTQxNGUtODVjYS00NjdjN2QwOTA1MWEiLCJGdWxsTmFtZSI6IjU1NSBUZXN0IiwiVXNlck5hbWUiOiJ0ZXN0QHY5LnN1YmZpZnR5LmRlIn0.a_U-Wz_ZsExJovoyncMTWJmXGSoCaC8nJjayIB-n7Rg"
+        XPhoneDomain="v9.subfifty.de"
+    ></authorization>
+    <presence Logging="Off"
+        Authorization="jwt"
+        BaseUrl="http://localhost/XPhoneConnect/myframes/presence"
+        BaseAPIUrl="http://localhost/XPhoneConnect/myframes/presence/api/presence"
+    ></presence>
+    <powershell Logging="Off"
+        Authorization="jwt"
+	    sqlHost="(local)\XPCONNECT"
+	    sqlDB="XPDATA"
+	    sqlUid=""
+	    sqlPwd=""
+    ></powershell>
+    <logfile Logging="Off"
+        Authorization="none"
+    ></logfile>
+    <vdir Logging="Off"
+        Authorization="none"
+    ></vdir>
+    <anybell Logging="Off"
+        Authorization="none"
+    ></anybell>
+    <callrouting Logging="Off"
+        Authorization="none"
+    ></callrouting>
+    <odbc Logging="Off"
+        Authorization="jwt"
+    >
+        <xe
+          uid="SYSTEM"
+          pwd="XPhone"
+        ></xe>
+        <xphone
+          uid=""
+          pwd=""
+        ></xphone>
+        <v9server
+          uid=""
+          pwd=""
+        ></v9server>
+    </odbc>
+    <zammad Logging="Off"
 		BaseUrl="http://ZAMMAD_SERVER"
 		BaseAPIUrl="http://ZAMMAD_SERVER/api/v1"
 		BearerToken="ZAMMAD_BEARER_TOKEN" 
-  ></zammad>
+    ></zammad>
 	<zendesk Logging="Off"
 		BaseUrl="https://ZENDESK_SERVER"
         BaseAPIUrl="https://ZENDESK_SERVER/api/v2"
         BearerToken="ZENDESK_BEARER_TOKEN" 
-  ></zendesk>
-  <presence Logging="On"
-    Authorization="jwt"
-    BaseUrl="http://localhost/XPhoneConnect/myframes/Presence"
-    BaseAPIUrl="http://localhost/XPhoneConnect/myframes/Presence/api/presence"
-  ></presence>
-  <powershell Logging="On"
-    Authorization="jwt"
-	sqlHost="(local)\XPCONNECT"
-	sqlDB="XPDATA"
-	sqlUid="sa"
-	sqlPwd="52145C85E4164eba8ABF870278BB3478"
-  ></powershell>
-  <logfile Logging="On"
-    Authorization="none"
-  ></logfile>
-  <vdir Logging="On"
-    Authorization="none"
-  ></vdir>
-  <anybell Logging="On"
-    Authorization="none"
-  ></anybell>
-  <callrouting Logging="On"
-    Authorization="none"
-  ></callrouting>
-  <odbc Logging="Off"
-    Authorization="jwt"
-  >
-    <xe
-      uid="SYSTEM"
-      pwd="XPhone"
-    ></xe>
-    <xphone
-      uid=""
-      pwd=""
-    ></xphone>
-    <v9server
-      uid=""
-      pwd=""
-    ></v9server>
-  </odbc>
-  <authorization Logging="On"
-    VerifyAccessUrl="http://localhost/XPhoneConnect/myframes/xphone/auth/Verify"
-    BearerToken="1eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2ODk2MTExMjYsIklkZW50aXR5VG9rZW4iOiIxMDA3MDkyMjMxIiwiVXNlckd1aWQiOiJmYTI4ZjdjYi0wYTdjLTQxNGUtODVjYS00NjdjN2QwOTA1MWEiLCJGdWxsTmFtZSI6IjU1NSBUZXN0IiwiVXNlck5hbWUiOiJ0ZXN0QHY5LnN1YmZpZnR5LmRlIn0.a_U-Wz_ZsExJovoyncMTWJmXGSoCaC8nJjayIB-n7Rg" 
-    Authorization="none"
-  ></authorization>
+    ></zendesk>
 </configuration>

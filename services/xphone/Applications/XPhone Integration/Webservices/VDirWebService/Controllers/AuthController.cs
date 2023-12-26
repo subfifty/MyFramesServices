@@ -10,6 +10,10 @@ using Newtonsoft.Json;
 using System.Management.Automation;
 using System.Collections.ObjectModel;
 
+using XPhoneRestApi;
+using System.Net.Http;
+using System.Threading.Tasks;
+
 namespace C4B.VDir.WebService.Controllers
 {
     internal class PowerShellHelper
@@ -233,6 +237,11 @@ namespace C4B.VDir.WebService.Controllers
         [HttpGet]
         public ActionResult Logon()
         {
+            //if (ApiConfig.Instance.RunningInDMZ())
+            //{
+            //    return Execute_DMZ_GET(this.HttpContext.Request.RawUrl);
+            //}
+
             string UserName = "";
             if (Request.Unvalidated.QueryString["UserName"] != null)
             {
@@ -258,6 +267,11 @@ namespace C4B.VDir.WebService.Controllers
         [HttpGet]
         public ActionResult Refresh()
         {
+            //if (ApiConfig.Instance.RunningInDMZ())
+            //{
+            //    return Execute_DMZ_GET(this.HttpContext.Request.RawUrl);
+            //}
+
             IDictionary<string, string> result = new Dictionary<string, string>();
 
             string UserGuid = "";
@@ -308,8 +322,12 @@ namespace C4B.VDir.WebService.Controllers
         }
 
         [HttpGet]
+        [ActionName("Help")]
         public string Get()
         {
+            if (ApiConfig.Instance.RunningInDMZ())
+                return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
+
             return ShowHelp();
         }
 
@@ -331,7 +349,6 @@ namespace C4B.VDir.WebService.Controllers
 
             return info + help;
         }
-
 
         #region Private
         MvcApplication _application

@@ -122,22 +122,24 @@ namespace XpRestApiInstaller
                 Console.WriteLine("=========================");
                 Console.WriteLine("");
                 Console.WriteLine("If you proceed, this program will modify your system:");
-                Console.WriteLine("   - Install/Update IIS ApplicationPool 'XPhoneConnectApi'");
-                Console.WriteLine("   - Install/Update IIS ApplicationPool 'XPhoneConnectMyFramesApi'");
+                Console.WriteLine("   - Install/Update IIS ApplicationPool(s) 'MyFramesApi, MyFramesSites'");
+                //Console.WriteLine("   - Install/Update IIS ApplicationPool 'XPhoneConnectMyFramesApi'");
+                if (Directory.Exists(Path.Combine(AssemblyDirectory, "MyFrames")))
+                    Console.WriteLine("   - Install/Update MyFrames Framework");
+#if RESTAPI
                 if (Directory.Exists(Path.Combine(AssemblyDirectory, "PresenceApi")))
                     Console.WriteLine("   - Install/Update REST service 'PresenceApi'");
                 if (Directory.Exists(Path.Combine(AssemblyDirectory, "RestApi")))
                     Console.WriteLine("   - Install/Update REST service 'RestApi'");
+#endif
                 if (Directory.Exists(Path.Combine(AssemblyDirectory, "Powershell")))
-                    Console.WriteLine("   - Install/Update Powershell scripts used by 'RestApi'");
+                    Console.WriteLine("   - Install/Update Powershell scripts used by 'MyFrames'");
                 if (Directory.Exists(Path.Combine(AssemblyDirectory, "Applink")))
                     Console.WriteLine("   - Install/Update Applink Resources (e.g. graphics)");
                 if (Directory.Exists(Path.Combine(AssemblyDirectory, "ApiLicense")))
                     Console.WriteLine("   - Install/Update REST API license");
                 if (Directory.Exists(Path.Combine(AssemblyDirectory, "ApiConfig")))
                     Console.WriteLine("   - Install/Update REST API configuration (keep existing config.xml)");
-                if (Directory.Exists(Path.Combine(AssemblyDirectory, "MyFrames")))
-                    Console.WriteLine("   - Install/Update MyFrames Framework");
                 Console.WriteLine("");
                 Console.WriteLine("Target directory: '" + XPhoneInstallDir + "'");
                 Console.WriteLine("");
@@ -157,10 +159,8 @@ namespace XpRestApiInstaller
                 }
 
                 ServerManager serverManager = new ServerManager();
-
+#if RESTAPI
                 ApplicationPool appPoolApi = null;
-                ApplicationPool appPoolMyFramesSites = null;
-                ApplicationPool appPoolMyFramesApi = null;
                 try
                 {
                     appPoolApi = serverManager.ApplicationPools.Add("XPhoneConnectApi");
@@ -170,7 +170,10 @@ namespace XpRestApiInstaller
                     appPoolApi = serverManager.ApplicationPools["XPhoneConnectApi"];
                 }
                 appPoolApi.ManagedRuntimeVersion = "";
-
+                Console.WriteLine("...Application Pool: \t\t" + appPoolApi.Name);
+                try { appPoolApi.Stop(); } catch { }
+#endif
+                ApplicationPool appPoolMyFramesSites = null;
                 try
                 {
                     appPoolMyFramesSites = serverManager.ApplicationPools.Add("MyFramesSites");
@@ -179,7 +182,10 @@ namespace XpRestApiInstaller
                 {
                     appPoolMyFramesSites = serverManager.ApplicationPools["MyFramesSites"];
                 }
+                Console.WriteLine("...Application Pool: \t\t" + appPoolMyFramesSites.Name);
+                try { appPoolMyFramesSites.Stop(); } catch { }
 
+                ApplicationPool appPoolMyFramesApi = null;
                 try
                 {
                     appPoolMyFramesApi = serverManager.ApplicationPools.Add("MyFramesApi");
@@ -189,20 +195,15 @@ namespace XpRestApiInstaller
                     appPoolMyFramesApi = serverManager.ApplicationPools["MyFramesApi"];
                 }
                 appPoolMyFramesApi.ManagedRuntimeVersion = "";
-
-                Console.WriteLine("...Application Pool: \t\t" + appPoolApi.Name);
-                Console.WriteLine("...Application Pool: \t\t" + appPoolMyFramesSites.Name);
                 Console.WriteLine("...Application Pool: \t\t" + appPoolMyFramesApi.Name);
-
-                try { appPoolApi.Stop(); } catch { }
                 try { appPoolMyFramesApi.Stop(); } catch { }
-                try { appPoolMyFramesSites.Stop(); } catch { }
 
                 Site site = serverManager.Sites.First(s => s.Id >= 1);
 
                 Application app = null;
                 string apiDir;
 
+#if RESTAPI
                 apiDir = "PresenceApi";
                 if (Directory.Exists(Path.Combine(AssemblyDirectory, apiDir)))
                 {
@@ -274,6 +275,7 @@ namespace XpRestApiInstaller
                     }
                     app.ApplicationPoolName = appPoolApi.Name;
                 }
+#endif
 
                 apiDir = "Powershell";
                 if (Directory.Exists(Path.Combine(AssemblyDirectory, apiDir)))
@@ -346,37 +348,46 @@ namespace XpRestApiInstaller
                         app = site.Applications.First(s => s.Path == "/XPhoneConnect/" + apiDir);
                     }
 
-                    app = null;
-                    try
+                    if (Directory.Exists(Path.Combine(AssemblyDirectory, apiDir + "/TeamsApp")))
                     {
-                        app = site.Applications.Add("/XPhoneConnect/" + apiDir + "/TeamsApp", Path.Combine(Path.Combine(XPhoneInstallDir, apiDir), "TeamsApp"));
-                    }
-                    catch
-                    {
-                        app = site.Applications.First(s => s.Path == "/XPhoneConnect/" + apiDir + "/TeamsApp");
+                        app = null;
+                        try
+                        {
+                            app = site.Applications.Add("/XPhoneConnect/" + apiDir + "/TeamsApp", Path.Combine(Path.Combine(XPhoneInstallDir, apiDir), "TeamsApp"));
+                        }
+                        catch
+                        {
+                            app = site.Applications.First(s => s.Path == "/XPhoneConnect/" + apiDir + "/TeamsApp");
+                        }
                     }
 
-                    app = null;
-                    try
+                    if (Directory.Exists(Path.Combine(AssemblyDirectory, apiDir + "/presence")))
                     {
-                        app = site.Applications.Add("/XPhoneConnect/" + apiDir + "/presence", Path.Combine(Path.Combine(XPhoneInstallDir, apiDir), "presence"));
+                        app = null;
+                        try
+                        {
+                            app = site.Applications.Add("/XPhoneConnect/" + apiDir + "/presence", Path.Combine(Path.Combine(XPhoneInstallDir, apiDir), "presence"));
+                        }
+                        catch
+                        {
+                            app = site.Applications.First(s => s.Path == "/XPhoneConnect/" + apiDir + "/presence");
+                        }
+                        app.ApplicationPoolName = appPoolMyFramesSites.Name;
                     }
-                    catch
-                    {
-                        app = site.Applications.First(s => s.Path == "/XPhoneConnect/" + apiDir + "/presence");
-                    }
-                    app.ApplicationPoolName = appPoolMyFramesSites.Name;
 
-                    app = null;
-                    try
+                    if (Directory.Exists(Path.Combine(AssemblyDirectory, apiDir + "/xphone")))
                     {
-                        app = site.Applications.Add("/XPhoneConnect/" + apiDir + "/xphone", Path.Combine(Path.Combine(XPhoneInstallDir, apiDir), "xphone"));
+                        app = null;
+                        try
+                        {
+                            app = site.Applications.Add("/XPhoneConnect/" + apiDir + "/xphone", Path.Combine(Path.Combine(XPhoneInstallDir, apiDir), "xphone"));
+                        }
+                        catch
+                        {
+                            app = site.Applications.First(s => s.Path == "/XPhoneConnect/" + apiDir + "/xphone");
+                        }
+                        app.ApplicationPoolName = appPoolMyFramesSites.Name;
                     }
-                    catch
-                    {
-                        app = site.Applications.First(s => s.Path == "/XPhoneConnect/" + apiDir + "/xphone");
-                    }
-                    app.ApplicationPoolName = appPoolMyFramesSites.Name;
 
                     app = null;
                     try
@@ -392,7 +403,9 @@ namespace XpRestApiInstaller
 
                 serverManager.CommitChanges();
 
+#if RESTAPI
                 try { appPoolApi.Start(); } catch { }
+#endif
                 try { appPoolMyFramesApi.Start(); } catch { }
                 try { appPoolMyFramesSites.Start(); } catch { }
 

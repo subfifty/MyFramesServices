@@ -29,6 +29,9 @@ namespace XPhoneRestApi.Controllers
         [AllowAnonymous]
         public string Get()
         {
+            if (ApiConfig.Instance.RunningInDMZ())
+                return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
+
             LogFile logFile = Logfiles.Find(ControllerName);
             string client = GetRemoteIPAddress().ToString();
             logFile.Append(string.Format("INF remoteIP='{0}' ShowHelp()", client), true);
@@ -39,6 +42,9 @@ namespace XPhoneRestApi.Controllers
         [HttpGet("license")]
         public JsonResult GetLicense()
         {
+            if (ApiConfig.Instance.RunningInDMZ())
+                return new JsonResult(ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ);
+
             LogFile logFile = Logfiles.Find(ControllerName);
             string client = GetRemoteIPAddress().ToString();
             logFile.Append(string.Format("INF remoteIP='{0}' GetLicense()", client), true);
@@ -58,6 +64,9 @@ namespace XPhoneRestApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public string Get(string cmd)
         {
+            if (ApiConfig.Instance.RunningInDMZ())
+                return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
+
             if (!IsValidLicense())
                 return "License not valid.";
 
@@ -263,6 +272,9 @@ namespace XPhoneRestApi.Controllers
         [HttpPost("anynode/route")]
         public JsonResult Post([FromBody] object value)
         {
+            if (ApiConfig.Instance.RunningInDMZ())
+                return new JsonResult(ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ);
+
             LogFile logFile = Logfiles.Find(ControllerName);
             string client = GetRemoteIPAddress().ToString();
 

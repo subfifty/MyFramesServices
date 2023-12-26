@@ -17,12 +17,16 @@ namespace XPhoneRestApi.Controllers
     public class PresenceController : XPhoneControllerBase
     {
         private static string ControllerName = "presence";
-        //private static ApiConfig ApiInstance = ApiConfig.Instance;
 
         // GET /presence/users/{mail}/agentstate/{state}
         [HttpGet("users/{mail}/agentstate/{state}")]
         public ContentResult SetAgentState(string mail, string state)
         {
+            if (ApiConfig.Instance.RunningInDMZ())
+            {
+                return Relay_ApiEndpoint_GET();
+            }
+
             LogFile logFile = Logfiles.Find(ControllerName);
             string client = GetRemoteIPAddress().ToString();
             logFile.Append(string.Format("INF remoteIP='{0}' SetUserState({1},{2})", client, mail, state), true);
@@ -40,6 +44,11 @@ namespace XPhoneRestApi.Controllers
         [HttpGet("users")]
         public ContentResult GetUsers()
         {
+            if (ApiConfig.Instance.RunningInDMZ())
+            {
+                return Relay_ApiEndpoint_GET();
+            }
+
             LogFile logFile = Logfiles.Find(ControllerName);
             string client = GetRemoteIPAddress().ToString();
             logFile.Append(string.Format("INF remoteIP='{0}' GetUsers()", client), true);
@@ -53,6 +62,9 @@ namespace XPhoneRestApi.Controllers
         [HttpPost("users")]
         public ContentResult GetUserList([FromBody] object value)
         {
+            if (ApiConfig.Instance.RunningInDMZ())
+                return this.Content(ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ, "application/json");
+
             LogFile logFile = Logfiles.Find(ControllerName);
             string client = GetRemoteIPAddress().ToString();
             logFile.Append(string.Format("INF remoteIP='{0}' GetUserList()", client), true);
@@ -86,6 +98,11 @@ namespace XPhoneRestApi.Controllers
         [HttpGet("users/{mail}")]
         public ContentResult GetUser(string mail)
         {
+            if (ApiConfig.Instance.RunningInDMZ())
+            {
+                return Relay_ApiEndpoint_GET();
+            }
+
             LogFile logFile = Logfiles.Find(ControllerName);
             string client = GetRemoteIPAddress().ToString();
             logFile.Append(string.Format("INF remoteIP='{0}' GetUser({1})", client, mail), true);
@@ -101,6 +118,9 @@ namespace XPhoneRestApi.Controllers
         [AllowAnonymous]
         public string GetHelp()
         {
+            if (ApiConfig.Instance.RunningInDMZ())
+                return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
+
             LogFile logFile = Logfiles.Find(ControllerName);
             string client = GetRemoteIPAddress().ToString();
             logFile.Append(string.Format("INF remoteIP='{0}' ShowHelp()", client), true);
@@ -134,44 +154,6 @@ namespace XPhoneRestApi.Controllers
                 ;
 
             return info + help + "\r\n" + helpDeprecated; ;
-        }
-
-        private ContentResult Execute_POST(object mails)
-        {
-            ApiConfig.Instance.ReloadConfiguration();
-            string Base_API_URL = ApiConfig.Instance.ReadAttributeValue("presence", "BaseAPIUrl");
-
-            if (String.IsNullOrEmpty(Base_API_URL))
-            {
-                return this.Content("Cannot execute query. Missing Api Parameters.", "application/json");
-            }
-
-            string url = Base_API_URL + "/users";
-
-            using (var client = new HttpClient())
-            {
-                //var request = new ClipRequest();
-                //request.source = new ClipSource();
-                //request.source.number = UserOneNumber;
-
-                //request.destination = new ClipDestination();
-                //request.destination.number = callno;
-
-                var json = Newtonsoft.Json.JsonConvert.SerializeObject(mails);
-                var data = new System.Net.Http.StringContent(json, System.Text.Encoding.UTF8, "application/json");
-
-                //var t = await client.PostAsync(url, data);
-
-                var t = Task.Run(() => client.PostAsync(url, data));
-                t.Wait();
-                //var result = t.Content.ReadAsStringAsync().Result;
-                var result = t.Result.Content.ReadAsStringAsync().Result;
-
-                //ClipResponse response = Newtonsoft.Json.JsonConvert.DeserializeObject<ClipResponse>(result);
-                 //return response.destination.number;
-
-                return this.Content(result, "application/json");
-            }
         }
 
         private ContentResult Execute_GET(string query = "")

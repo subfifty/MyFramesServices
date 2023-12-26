@@ -61,6 +61,9 @@ namespace XPhoneRestApi.Controllers
         [HttpGet]
         public string Get()
         {
+            if (ApiConfig.Instance.RunningInDMZ())
+                return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
+
             return ShowHelp();
         }
 
@@ -68,6 +71,9 @@ namespace XPhoneRestApi.Controllers
         [HttpGet("{cmd}")]
         public string Get(string cmd)
         {
+            if (ApiConfig.Instance.RunningInDMZ())
+                return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
+
             if (!IsValidLicense())
                 return "License not valid.";
 
@@ -82,6 +88,9 @@ namespace XPhoneRestApi.Controllers
         [HttpGet("{name}/{cmd}")]
         public string Get(string name, string cmd)
         {
+            if (ApiConfig.Instance.RunningInDMZ())
+                return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
+
             if (!IsValidLicense())
                 return "License not valid.";
 
