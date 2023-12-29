@@ -65,7 +65,9 @@ namespace XPhoneRestApi.Controllers
         public string Get(string cmd)
         {
             if (ApiConfig.Instance.RunningInDMZ())
-                return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
+            {
+                return Relay_ApiEndpoint_GET().Content;
+            }
 
             if (!IsValidLicense())
                 return "License not valid.";
