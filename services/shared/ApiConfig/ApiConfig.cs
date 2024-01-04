@@ -61,9 +61,15 @@ namespace XPhoneRestApi
         }
 
         public const string METHOD_NOT_SUPPORTED_IN_DMZ = "Method not supported in DMZ installations.";
+
         public bool RunningInDMZ()
         {
             return ReadAttributeValue("dmz", "DMZMode", "0") == "1";
+        }
+
+        public bool UseWebapi()
+        {
+            return ReadAttributeValue("authorization", "AuthMode", "").ToLower() == "webapi";
         }
 
         public string ReadAttributeValue(string path, string attribute, string defaultValue = "")

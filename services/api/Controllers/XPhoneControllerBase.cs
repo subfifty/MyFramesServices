@@ -191,7 +191,7 @@ namespace XPhoneRestApi.Controllers
             }
         }
 
-        internal async Task<ContentResult> RelayHttp_POST(string query, string endpoint)
+        internal async Task<ContentResult> RelayHttp_POST(string query, string endpoint, string body = null)
         {
             if (String.IsNullOrEmpty(endpoint))
             {
@@ -200,8 +200,14 @@ namespace XPhoneRestApi.Controllers
 
             try
             {
-                var body = await Request.GetRawBodyAsync();
+                if (body == null)
+                {
+                    body = await Request.GetRawBodyAsync();
+                }
                 var content = new StringContent(body);
+                
+                if ( !String.IsNullOrEmpty(body))
+                    content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
                 string url = endpoint + query;
 
@@ -213,12 +219,9 @@ namespace XPhoneRestApi.Controllers
 
                     var t = Task.Run(() => client.PostAsync(url, content));
                     t.Wait();
-                    //var result = t.Content.ReadAsStringAsync().Result;
                     var result = t.Result.Content.ReadAsStringAsync().Result;
 
-                    //ClipResponse response = Newtonsoft.Json.JsonConvert.DeserializeObject<ClipResponse>(result);
-                    //return response.destination.number;
-
+                    this.HttpContext.Response.StatusCode = (int)t.Result.StatusCode;
                     return this.Content(result, "application/json");
                 }
             }

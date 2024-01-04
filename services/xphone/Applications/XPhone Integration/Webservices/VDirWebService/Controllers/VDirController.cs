@@ -286,7 +286,7 @@ namespace C4B.VDir.WebService.Controllers
                     {
                         IsAuthenticated = true,
                         IsAdmin = userInfo.IsAdmin,
-                        SessionGUID = Guid.Empty.ToString(), // Dummy
+                        SessionGUID = Guid.NewGuid().ToString(),
                         UserGUID = userInfo.Guid.ToString(),
                         CultureInfoName = userInfo.Language.Name,
                         FullName = userInfo.Fullname,

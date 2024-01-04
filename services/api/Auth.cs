@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Net;
 
 namespace XPhoneRestApi
 {
@@ -78,23 +79,34 @@ namespace XPhoneRestApi
             }
             */
 
-            string VerifyAccessUrl = AuthEndpoint + "/verify";
-
-            HttpClient client = new HttpClient();
-            client.Timeout = new TimeSpan(0, 0, 10);
-            client.DefaultRequestHeaders.Add("Accept", "*/*");
-            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
-            try
+            string endpoint = AuthEndpoint + "/verify";
+            
+            if (ApiConfig.Instance.UseWebapi())
             {
-                var result = Task.Run(() => client.GetStringAsync(VerifyAccessUrl)).Result;
+                endpoint = ApiConfig.Instance.ReadAttributeValue("authorization", "AuthEndpointWebApi");
+                endpoint += "/configuration/getCollaborationSection";
+                //return RelayHttp_GET("/configuration/getCollaborationSection", endpoint);
             }
-            catch (Exception ex) 
+
+            using (var client = new HttpClient())
             {
-                // not logged in or role not authorized
-                context.Result = new JsonResult(new { message = "Unauthorized: " + ex.Message }) 
-                { 
-                    StatusCode = StatusCodes.Status401Unauthorized 
-                };
+                client.Timeout = new TimeSpan(0, 0, 10);
+                client.DefaultRequestHeaders.Add("Accept", "*/*");
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+                try
+                {
+                    var t = Task.Run(() => client.GetStringAsync(endpoint));
+                    t.Wait();
+                    string result = t.Result;
+                }
+                catch (Exception ex)
+                {
+                    // not logged in or role not authorized
+                    context.Result = new JsonResult(new { message = "Unauthorized: " + ex.Message })
+                    {
+                        StatusCode = StatusCodes.Status401Unauthorized
+                    };
+                }
             }
         }
     }
