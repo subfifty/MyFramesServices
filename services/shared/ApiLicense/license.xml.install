@@ -1,47 +1,29 @@
 <LicensePackage>
-  <Package Id="{84588275-041B-4773-8318-D401A0D2A47B}" CreationTimeUTC="2023-01-17 18:25:00" Version="1.0" />
+  <Package Id="{84588275-041B-4773-8318-D401A0D2A47B}" CreationTimeUTC="2022-01-10 18:25:00" Version="1.0" />
   <Partner Name="C4B Com For Business AG" Address="Gabriele Münter Str. 5" ZIPCode="82110" City="Germering" Country="DE" EMail="support@c4b.de" Id="{BDA91239-5CDC-4C63-B21C-3AC826AEE7B7}" />
   <Customer Name="C4B Com For Business AG" Address="Gabriele Münter Str. 5" ZIPCode="82110" City="Germering" Country="DE" EMail="support@c4b.de" Id="{86311451-74F8-4709-BF13-762FFD9D6F9D}" />
   <Object Id="AnyBell">
     <Description>XPhone Connect AnyBell API</Description>
-    <ExpirationDate>2024-01-01</ExpirationDate>
+    <ExpirationDate>2025-04-01</ExpirationDate>
     <Version>1.0</Version>
-    <LicenseType>NFR</LicenseType>
+    <LicenseType>Demo</LicenseType>
   </Object>
   <Object Id="CallRouting">
     <Description>XPhone Connect CallRouting API</Description>
-    <ExpirationDate>2024-01-01</ExpirationDate>
+    <ExpirationDate>2025-01-01</ExpirationDate>
     <Version>1.0</Version>
-    <LicenseType>NFR</LicenseType>
+    <LicenseType>Demo</LicenseType>
   </Object>
   <Object Id="Powershell">
     <Description>XPhone Connect Powershell API</Description>
-    <ExpirationDate>2024-01-01</ExpirationDate>
+    <ExpirationDate>2025-04-01</ExpirationDate>
     <Version>1.0</Version>
-    <LicenseType>NFR</LicenseType>
+    <LicenseType>Demo</LicenseType>
   </Object>
   <Object Id="LogFile">
     <Description>XPhone Connect LogFile API</Description>
-    <ExpirationDate>2024-01-01</ExpirationDate>
+    <ExpirationDate>2025-04-01</ExpirationDate>
     <Version>1.0</Version>
-    <LicenseType>NFR</LicenseType>
+    <LicenseType>Demo</LicenseType>
   </Object>
-  <Object Id="ODBC">
-    <Description>XPhone Connect ODBC API</Description>
-    <ExpirationDate>2024-01-01</ExpirationDate>
-    <Version>1.0</Version>
-    <LicenseType>NFR</LicenseType>
-  </Object>
-  <Object Id="Zendesk">
-    <Description>XPhone Connect Zendesk API</Description>
-    <ExpirationDate>2024-01-01</ExpirationDate>
-    <Version>1.0</Version>
-    <LicenseType>NFR</LicenseType>
-  </Object>
-  <Object Id="Zammad">
-    <Description>XPhone Connect Zammad API</Description>
-    <ExpirationDate>2024-01-01</ExpirationDate>
-    <Version>1.0</Version>
-    <LicenseType>NFR</LicenseType>
-  </Object>
-<SignatureKey><RSAKeyValue><Modulus>4AqZTvqHr/IELJJREFFf+ffyQIZv1jD0WGrRo0ZNfYXfJPFOCUP0heT08QabzbIex8vvr6dhL1whnYR1MD+QSGe2tFrejr8/+IhhtwAk/P3hD31Fq0Z6j16jdJY0ZwVdPwFixcd/i/iSfZ17+tAMeD8ugMpZI7GYgABQhDhz4uU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></SignatureKey><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" /><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" /><DigestValue>z0LkRrQckasv/X2Nfon3kalxk0Zz6tm1lpqweZgqw6o=</DigestValue></Reference></SignedInfo><SignatureValue>zqPC7P+ARztG+Ed8msglac1++IJ9/no2Kv+++gFMFRQwAXNem92e+X08ng+pYfVa8T/XOB9TuUxOVf7EyFivhqfNh6MgE9M7LnqtBtfo7CgH91m64FRjuQE39MBXmalD0p1OAfGO9mRoCNoGIY8ivMUSwUmvWgoslkEzMoc8cpQ=</SignatureValue></Signature></LicensePackage>
+<SignatureKey><RSAKeyValue><Modulus>yGNGtdGD0TE7LPkm2SeFQADrqe8WnXcQ7MqBJWbKTkee9zB9Vi03+Q5bzvaIwod1z+V5VpOsU9N3dyXwb98b9EROg6UFAGOcEtFHhvX6GTsDUpDHCVsNw2EoXrWUA6WUNso3e/yhsTEHLQIXQqTuu8B9jSab7kf7VhZetHZcbrk=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></SignatureKey><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" /><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" /><DigestValue>63NP6xWYjow9OV2ngFOWX3y/4NQ9DLiaCxDLrI1Xo1M=</DigestValue></Reference></SignedInfo><SignatureValue>ryfMrYmfe4EIEGOSl+Co0GWVNaB/NBAu94pCERH0ZdlTI6esyr3PzScLZ/ZPUQx+Cee2yiHqXdLhablZyzoUJ+9C0/HubQ1J6mp8w6G+1UZEzGr/5qWdu1hNeExNLpOOpXd6eoN97ZNvw8oSVXPj1Tdf7ZUUoIdL4CLOEE+svnM=</SignatureValue></Signature></LicensePackage>

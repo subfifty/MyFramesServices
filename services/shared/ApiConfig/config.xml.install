@@ -7,9 +7,10 @@
     ></dmz>
     <authorization Logging="Off"
         Authorization="jwt"
-        AuthEndpoint="http://10.1.1.54/XPhoneConnect/myframes/xphone/auth"
+		AuthMode="Webapi"
+		AuthEndpointWebApi="http://localhost/XPhoneConnect/webclientapi/api/v1"
+        AuthEndpoint="http://localhost/XPhoneConnect/myframes/xphone/auth"
         BearerToken="1eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2ODk2MTExMjYsIklkZW50aXR5VG9rZW4iOiIxMDA3MDkyMjMxIiwiVXNlckd1aWQiOiJmYTI4ZjdjYi0wYTdjLTQxNGUtODVjYS00NjdjN2QwOTA1MWEiLCJGdWxsTmFtZSI6IjU1NSBUZXN0IiwiVXNlck5hbWUiOiJ0ZXN0QHY5LnN1YmZpZnR5LmRlIn0.a_U-Wz_ZsExJovoyncMTWJmXGSoCaC8nJjayIB-n7Rg"
-        XPhoneDomain="v9.subfifty.de"
     ></authorization>
     <presence Logging="Off"
         Authorization="jwt"

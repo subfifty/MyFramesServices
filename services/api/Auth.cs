@@ -69,6 +69,12 @@ namespace XPhoneRestApi
                 }
             }
 
+            // Sonderlocke für ClipBuddy. Hart kodierter Token.
+            if (token == "ClipBuddySecret")
+            {
+                return;
+            }
+
             /*
             // Sonderlocke für Dashboard-Scripts ohne "echte" Authentifizierung
             // ==> braucht es jetzt nicht mehr! Wird über den Referer abgewickelt!
