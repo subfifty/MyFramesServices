@@ -30,8 +30,8 @@ namespace XPhoneRestApi.Controllers
         [AllowAnonymous]
         public string Get()
         {
-            if (ApiConfig.Instance.RunningInDMZ())
-                return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
+            //if (ApiConfig.Instance.RunningInDMZ())
+            //    return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
 
             LogFile logFile = Logfiles.Find(ControllerName);
             string client = GetRemoteIPAddress().ToString();
@@ -43,8 +43,8 @@ namespace XPhoneRestApi.Controllers
         [HttpGet("license")]
         public JsonResult GetLicense()
         {
-            if (ApiConfig.Instance.RunningInDMZ())
-                return new JsonResult(ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ);
+            //if (ApiConfig.Instance.RunningInDMZ())
+            //    return new JsonResult(ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ);
 
             LogFile logFile = Logfiles.Find(ControllerName);
             string client = GetRemoteIPAddress().ToString();
@@ -64,8 +64,8 @@ namespace XPhoneRestApi.Controllers
         [HttpGet("scripts")]
         public object GetScripts()
         {
-            if ( ApiConfig.Instance.RunningInDMZ() )
-                return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
+            //if ( ApiConfig.Instance.RunningInDMZ() )
+            //    return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
 
             if (!IsValidLicense())
                 return "License not valid.";
@@ -100,6 +100,7 @@ namespace XPhoneRestApi.Controllers
 
         // GET /powershell/noauth/[script]?key=[key]&value=[val]
         [HttpGet("noauth/{script}")]
+        [AllowInDMZ]
         [AllowAnonymous]
         public async Task<object> ExecuteScriptNoAuth(string script)
         {
@@ -126,6 +127,7 @@ namespace XPhoneRestApi.Controllers
 
         // GET /powershell/scripts/[script]?key=[key]&value=[val]
         [HttpGet("scripts/{script}")]
+        [AllowInDMZ]
         public async Task<object> ExecuteScript(string script)
         {
             if (ApiConfig.Instance.RunningInDMZ())
@@ -272,8 +274,8 @@ namespace XPhoneRestApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<string> Get(string cmd)
         {
-            if (ApiConfig.Instance.RunningInDMZ())
-                return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
+            //if (ApiConfig.Instance.RunningInDMZ())
+            //    return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
 
             if (!IsValidLicense())
                 return "License not valid.";

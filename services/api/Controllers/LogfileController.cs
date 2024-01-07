@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -44,6 +43,8 @@ namespace XPhoneRestApi.Controllers
     //=======================================================================
     [Route("[controller]")]
     [ApiController]
+    [Authorize("logfile")]
+    [AllowAnonymous]
     public class LogfileController : ControllerBase
     {
         private static LicenseObject ControllerLicense = ApiLicense.Instance.ParseLicenseObject("LogFile");
@@ -61,8 +62,8 @@ namespace XPhoneRestApi.Controllers
         [HttpGet]
         public string Get()
         {
-            if (ApiConfig.Instance.RunningInDMZ())
-                return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
+            //if (ApiConfig.Instance.RunningInDMZ())
+            //    return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
 
             return ShowHelp();
         }
@@ -71,8 +72,8 @@ namespace XPhoneRestApi.Controllers
         [HttpGet("{cmd}")]
         public string Get(string cmd)
         {
-            if (ApiConfig.Instance.RunningInDMZ())
-                return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
+            //if (ApiConfig.Instance.RunningInDMZ())
+            //    return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
 
             if (!IsValidLicense())
                 return "License not valid.";
@@ -88,8 +89,8 @@ namespace XPhoneRestApi.Controllers
         [HttpGet("{name}/{cmd}")]
         public string Get(string name, string cmd)
         {
-            if (ApiConfig.Instance.RunningInDMZ())
-                return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
+            //if (ApiConfig.Instance.RunningInDMZ())
+            //    return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
 
             if (!IsValidLicense())
                 return "License not valid.";

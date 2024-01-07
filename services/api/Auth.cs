@@ -7,10 +7,24 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System.Net;
 
 namespace XPhoneRestApi
 {
+    /// <summary>
+    /// Marker interface to allow access in DMZ mode.
+    /// </summary>
+    public interface IAllowInDMZ
+    {
+    }
+
+    /// <summary>
+    /// Specifies that the class or method that this attribute is applied to is allowed in DMZ usage. 
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+    public class AllowInDMZAttribute : Attribute, IAllowInDMZ
+    {
+    }
+
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class AuthorizeAttribute : Attribute, IAuthorizationFilter
     {
@@ -22,6 +36,21 @@ namespace XPhoneRestApi
 
         public void OnAuthorization(AuthorizationFilterContext context)
         {
+            // Test, if method is allowed to be use in DMZ installation.
+            if (ApiConfig.Instance.RunningInDMZ())
+            {
+                var allowInDMZ = context.ActionDescriptor.EndpointMetadata.OfType<AllowInDMZAttribute>().Any();
+                if (!allowInDMZ)
+                {
+                    // not logged in or role not authorized
+                    context.Result = new JsonResult(new { message = "ERROR: " + ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ })
+                    {
+                        StatusCode = StatusCodes.Status401Unauthorized
+                    };
+                    return;
+                }
+            }
+
             // Skip authorization if action is decorated with [AllowAnonymous] attribute
             var allowAnonymous = context.ActionDescriptor.EndpointMetadata.OfType<AllowAnonymousAttribute>().Any();
             if (allowAnonymous)

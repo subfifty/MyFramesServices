@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace XPhoneRestApi.Controllers
 {
@@ -200,8 +199,8 @@ namespace XPhoneRestApi.Controllers
         [AllowAnonymous]
         public string GetHelp()
         {
-            if (ApiConfig.Instance.RunningInDMZ())
-                return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
+            //if (ApiConfig.Instance.RunningInDMZ())
+            //    return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
 
             LogFile logFile = Logfiles.Find(ControllerName);
             string client = GetRemoteIPAddress().ToString();
@@ -213,8 +212,8 @@ namespace XPhoneRestApi.Controllers
         [HttpGet("license")]
         public JsonResult GetLicense()
         {
-            if (ApiConfig.Instance.RunningInDMZ())
-                return new JsonResult( ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ );
+            //if (ApiConfig.Instance.RunningInDMZ())
+            //    return new JsonResult( ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ );
 
             LogFile logFile = Logfiles.Find(ControllerName);
             string client = GetRemoteIPAddress().ToString();
@@ -231,6 +230,7 @@ namespace XPhoneRestApi.Controllers
         }
 
         [HttpPost("Logon")]
+        [AllowInDMZ]
         [AllowAnonymous]
         public async Task<IActionResult> Logon()
         {
@@ -290,6 +290,7 @@ namespace XPhoneRestApi.Controllers
         }
 
         [HttpPost("Refresh")]
+        [AllowInDMZ]
         [AllowAnonymous]
         public async Task<IActionResult> Refresh()
         {
@@ -338,6 +339,7 @@ namespace XPhoneRestApi.Controllers
         }
 
         [HttpPost("Verify")]
+        [AllowInDMZ]
         public async Task<IActionResult> Verify()
         {
             ApiConfig.Instance.ReloadConfiguration();

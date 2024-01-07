@@ -1,15 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Net;
 using System.Text;
 using System.Data.Odbc;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Authorization;
 
 namespace XPhoneRestApi.Controllers
@@ -46,8 +40,8 @@ namespace XPhoneRestApi.Controllers
         [AllowAnonymous]
         public string GetHelp()
         {
-            if (ApiConfig.Instance.RunningInDMZ())
-                return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
+            //if (ApiConfig.Instance.RunningInDMZ())
+            //    return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
 
             LogFile logFile = Logfiles.Find(ControllerName);
             string client = GetRemoteIPAddress().ToString();
@@ -59,8 +53,8 @@ namespace XPhoneRestApi.Controllers
         [HttpGet("license")]
         public JsonResult GetLicense()
         {
-            if (ApiConfig.Instance.RunningInDMZ())
-                return new JsonResult( ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ );
+            //if (ApiConfig.Instance.RunningInDMZ())
+            //    return new JsonResult( ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ );
 
             LogFile logFile = Logfiles.Find(ControllerName);
             string client = GetRemoteIPAddress().ToString();
@@ -80,8 +74,8 @@ namespace XPhoneRestApi.Controllers
         [HttpPost]
         public ContentResult Post([FromBody] object value)
         {
-            if (ApiConfig.Instance.RunningInDMZ())
-                return this.Content(ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ, "application/json");
+            //if (ApiConfig.Instance.RunningInDMZ())
+            //    return this.Content(ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ, "application/json");
 
             if (!IsValidLicense())
             {

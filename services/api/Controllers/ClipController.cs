@@ -2,12 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Text.Json;
-using System.Threading;
 using Microsoft.AspNetCore.Http;
-using System.Net;
-using System.Linq;
-using System.Management.Automation.Language;
-using System.Security;
 using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -29,8 +24,8 @@ namespace XPhoneRestApi.Controllers
         [AllowAnonymous]
         public string Get()
         {
-            if (ApiConfig.Instance.RunningInDMZ())
-                return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
+            //if (ApiConfig.Instance.RunningInDMZ())
+            //    return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
 
             LogFile logFile = Logfiles.Find(ControllerName);
             string client = GetRemoteIPAddress().ToString();
@@ -42,8 +37,8 @@ namespace XPhoneRestApi.Controllers
         [HttpGet("license")]
         public JsonResult GetLicense()
         {
-            if (ApiConfig.Instance.RunningInDMZ())
-                return new JsonResult(ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ);
+            //if (ApiConfig.Instance.RunningInDMZ())
+            //    return new JsonResult(ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ);
 
             LogFile logFile = Logfiles.Find(ControllerName);
             string client = GetRemoteIPAddress().ToString();
@@ -61,6 +56,7 @@ namespace XPhoneRestApi.Controllers
 
         // GET /clip/{cmd}
         [HttpGet("{cmd}")]
+        [AllowInDMZ]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public string Get(string cmd)
         {
@@ -274,8 +270,8 @@ namespace XPhoneRestApi.Controllers
         [HttpPost("anynode/route")]
         public JsonResult Post([FromBody] object value)
         {
-            if (ApiConfig.Instance.RunningInDMZ())
-                return new JsonResult(ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ);
+            //if (ApiConfig.Instance.RunningInDMZ())
+            //    return new JsonResult(ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ);
 
             LogFile logFile = Logfiles.Find(ControllerName);
             string client = GetRemoteIPAddress().ToString();

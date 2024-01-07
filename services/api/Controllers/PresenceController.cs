@@ -20,6 +20,7 @@ namespace XPhoneRestApi.Controllers
 
         // GET /presence/users/{mail}/agentstate/{state}
         [HttpGet("users/{mail}/agentstate/{state}")]
+        [AllowInDMZ]
         public ContentResult SetAgentState(string mail, string state)
         {
             if (ApiConfig.Instance.RunningInDMZ())
@@ -42,6 +43,7 @@ namespace XPhoneRestApi.Controllers
 
         // GET /presence/users
         [HttpGet("users")]
+        [AllowInDMZ]
         public ContentResult GetUsers()
         {
             if (ApiConfig.Instance.RunningInDMZ())
@@ -62,8 +64,8 @@ namespace XPhoneRestApi.Controllers
         [HttpPost("users")]
         public ContentResult GetUserList([FromBody] object value)
         {
-            if (ApiConfig.Instance.RunningInDMZ())
-                return this.Content(ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ, "application/json");
+            //if (ApiConfig.Instance.RunningInDMZ())
+            //    return this.Content(ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ, "application/json");
 
             LogFile logFile = Logfiles.Find(ControllerName);
             string client = GetRemoteIPAddress().ToString();
@@ -96,6 +98,7 @@ namespace XPhoneRestApi.Controllers
 
         // GET /presence/users/{mail}
         [HttpGet("users/{mail}")]
+        [AllowInDMZ]
         public ContentResult GetUser(string mail)
         {
             if (ApiConfig.Instance.RunningInDMZ())
@@ -118,8 +121,8 @@ namespace XPhoneRestApi.Controllers
         [AllowAnonymous]
         public string GetHelp()
         {
-            if (ApiConfig.Instance.RunningInDMZ())
-                return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
+            //if (ApiConfig.Instance.RunningInDMZ())
+            //    return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
 
             LogFile logFile = Logfiles.Find(ControllerName);
             string client = GetRemoteIPAddress().ToString();

@@ -1,16 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Net;
 using System.Net.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace XPhoneRestApi.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize("zammad")]
+    [AllowAnonymous]
     public class ZammadController : XPhoneControllerBase
     {
         private static string ControllerName = "zammad";
@@ -19,8 +18,8 @@ namespace XPhoneRestApi.Controllers
         [HttpGet]
         public string GetHelp()
         {
-            if (ApiConfig.Instance.RunningInDMZ())
-                return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
+            //if (ApiConfig.Instance.RunningInDMZ())
+            //    return ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ;
 
             LogFile logFile = Logfiles.Find(ControllerName);
             string client = GetRemoteIPAddress().ToString();
@@ -209,8 +208,8 @@ namespace XPhoneRestApi.Controllers
 
         private ContentResult Execute_GET(string query = "")
         {
-            if (ApiConfig.Instance.RunningInDMZ())
-                return this.Content(ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ, "application/json");
+            //if (ApiConfig.Instance.RunningInDMZ())
+            //    return this.Content(ApiConfig.METHOD_NOT_SUPPORTED_IN_DMZ, "application/json");
 
             ApiConfig.Instance.ReloadConfiguration();
             string Base_API_URL = ApiConfig.Instance.ReadAttributeValue("zammad", "BaseAPIUrl");
