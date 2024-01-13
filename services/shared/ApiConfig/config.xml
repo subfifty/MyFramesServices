@@ -27,7 +27,7 @@
     Authorization="none"
   ></vdir>
   <callrouting Logging="On"
-    Authorization="jwt"
+    Authorization="none"
   ></callrouting>
   <odbc Logging="Off"
     Authorization="none"

@@ -297,7 +297,14 @@ namespace XPhoneRestApi.Controllers
             AnynodeRoutingRequest request = JsonSerializer.Deserialize<AnynodeRoutingRequest>(value.ToString());
 
             agent = Normalize(request.sourceAddress.dialString);
-            partner = Normalize(request.destinationAddress.dialString);
+            try
+            {
+                partner = Normalize(request.destinationAddress.dialString);
+            }
+            catch
+            {
+                partner = "any";
+            }
 
             if (agent != null && partner != null)
             {

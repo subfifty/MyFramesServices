@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("MyFramesInstaller")]
-[assembly: AssemblyCopyright("Copyright © subfifty labs")]
+[assembly: AssemblyCopyright("Copyright © subfifty solution")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

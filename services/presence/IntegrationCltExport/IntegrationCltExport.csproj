@@ -64,35 +64,14 @@
     <Compile Include="_trademark.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Integration.config.xml" />
+    <Content Include="Integration.config.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>echo off
-rem Setzen der Umgebungsvariablen
-rem __BRANCHPATH sollte auf das Branch-Verzeichnis zeigen z.B.: E:\TFS\C4B UC\Main
-SET __BRANCHPATH=$(ProjectDir)..\..\..\..\..
-SET __CLIENTPATH=%25__BRANCHPATH%25\_Build\$(ConfigurationName)\client
-SET __SERVERPATH=%25__BRANCHPATH%25\_Build\$(ConfigurationName)\server
-
-rem Verzeichnisinitialisierung
-if NOT EXIST "%25__BRANCHPATH%25\_Build" md "%25__BRANCHPATH%25\_Build"
-if NOT EXIST "%25__BRANCHPATH%25\_Build\$(ConfigurationName)" md "%25__BRANCHPATH%25\_Build\$(ConfigurationName)"
-if NOT EXIST "%25__CLIENTPATH%25" md "%25__CLIENTPATH%25"
-if NOT EXIST "%25__SERVERPATH%25" md "%25__SERVERPATH%25"
-
-rem Kopieren der Dateien
-xcopy "$(TargetDir)*$(TargetExt)" "%25__SERVERPATH%25\" /S/C/Y/D
-xcopy "$(TargetDir)*$(TargetExt)" "%25__CLIENTPATH%25\" /S/C/Y/D
-xcopy "$(TargetDir)*.pdb" "%25__SERVERPATH%25\" /S/C/Y/D
-xcopy "$(TargetDir)*.pdb" "%25__CLIENTPATH%25\" /S/C/Y/D
-xcopy "$(TargetDir)*.xml" "%25__SERVERPATH%25\" /S/C/Y/D
-echo "$(TargetDir)*.xml"
-
-rem Löschen der Umgebungsvariablen
-SET __BRANCHPATH=
-SET __CLIENTPATH=
-SET __SERVERPATH=</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
