@@ -123,7 +123,6 @@ namespace XpRestApiInstaller
                 Console.WriteLine("");
                 Console.WriteLine("If you proceed, this program will modify your system:");
                 Console.WriteLine("   - Install/Update IIS ApplicationPool(s) 'MyFramesApi, MyFramesSites'");
-                //Console.WriteLine("   - Install/Update IIS ApplicationPool 'XPhoneConnectMyFramesApi'");
                 if (Directory.Exists(Path.Combine(AssemblyDirectory, "MyFrames")))
                     Console.WriteLine("   - Install/Update MyFrames Framework");
 #if RESTAPI

@@ -98,6 +98,22 @@ namespace XPhoneRestApi
                 }
             }
 
+            // Wenn der Request auf dem XPhone Server ausgeführt wird (localhost), braucht man keine Authentifizierung
+            // https://stackoverflow.com/questions/11834091/how-to-check-if-localhost
+            var con = context.HttpContext.Connection;
+            var remoteAddress = con.RemoteIpAddress.ToString();
+
+            if (!String.IsNullOrEmpty(remoteAddress))
+            {
+                // check if localhost
+                if (remoteAddress == "127.0.0.1" || remoteAddress == "::1")
+                    return;
+
+                // compare with local address
+                if (remoteAddress == con.LocalIpAddress.ToString())
+                    return;
+            }
+
             // Sonderlocke für ClipBuddy. Hart kodierter Token.
             if (token == "ClipBuddySecret")
             {
